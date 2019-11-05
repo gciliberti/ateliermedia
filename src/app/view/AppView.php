@@ -49,8 +49,16 @@ EOT;
 
   private function renderHome(){//private
     $html = "";
+    $requestedId = new \mf\utils\HttpRequest;
+    if(isset($requestedId->post['recherche'])){//Si une recherche a été effectuée
+      $recherche  = "%".$requestedId->post['recherche']."%";
 
-    foreach ($this->data as $media) {
+      $data = \app\model\Media::select()->where("title","LIKE",$recherche)->orWhere("keywords","LIKE",$recherche)->orWhere("type","LIKE",$recherche)->orWhere("genre","LIKE",$recherche)->get();
+    }else{
+      $data = $this->data;
+    }
+
+    foreach ($data as $media) {
       $title = $media->title;
       $type = $media->type;
       $genre = $media->genre;
