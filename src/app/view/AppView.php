@@ -18,8 +18,22 @@ class AppView extends \mf\view\AbstractView {
   */
   private function renderHeader(){
     $html = "";
+    $app_root = (new \mf\utils\HttpRequest())->root;//Pour aller chercher les images
+    $objRout = new \mf\router\Router();
+    $hrefBorrow = $objRout->urlFor('borrow');
+    $hrefProfile = $objRout->urlFor('profile');
+    $hrefHome = $objRout->urlFor('home');
     $html.=<<<EOT
-    <h1>Notre super app</h1>
+    <form class="search" action="${hrefHome}" method="post">
+      <input type="text" name="recherche" value="" placeholder="Rechercher">
+      <input src="${app_root}/html/img/search.svg" width="32" height="32" type="image" alt="Recherche">
+    </form>
+    <nav>
+      <ul class="menu">
+        <li><a href="${hrefBorrow}"> <img src="${app_root}/html/img/books-stack.svg" width="32" height="32" alt="Mes emprunts"> </a> </li>
+        <li><a href="${hrefProfile}">  <img src="${app_root}/html/img/user.svg" width="32" height="32" alt="Mon Profil"> </a></li>
+      </ul>
+    </nav>
 EOT;
     return $html;
   }
@@ -89,10 +103,10 @@ EOT;
       break;
     }
 
-    $header = $this->renderHeader();
+    $navBar = $this->renderHeader();
     $footer = $this->renderFooter();
     $html = <<<EOT
-    <header> ${header} </header>
+    <header> ${navBar} </header>
     <section>
       ${content}
     </section>

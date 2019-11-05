@@ -54,6 +54,11 @@ class AppController extends \mf\control\AbstractController {
     }*/
     $vue = new \app\view\AppView();
     $vue->render("home");
+    $requestedId = new \mf\utils\HttpRequest;
+    if(isset($requestedId->post['recherche'])){
+      $recherche  = $requestedId->post['recherche'];
+      echo "recherche: ".$recherche;
+    }
   }
 
 }
