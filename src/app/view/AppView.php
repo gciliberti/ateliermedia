@@ -49,11 +49,11 @@ EOT;
       $html.= <<<EOT
       <p>Corp de la page</p>
 EOT;
+    return $html;
     }
 
-    return $html;
 
-  }
+
 
   /* Méthode renderUeserTweets
   *
@@ -81,7 +81,7 @@ EOT;
       case 'home':
       $content = $this->renderHome();
       break;
-      
+
       default:
       $content = $this->renderHome();
 

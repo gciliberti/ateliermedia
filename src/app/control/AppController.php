@@ -47,6 +47,11 @@ class AppController extends \mf\control\AbstractController {
     *      afficher le text du tweet, l'auteur et la date de création
     *  3 Retourner un block HTML qui met en forme la liste
     */
+    /*$requete = \app\model\User::select()->where('id','=','4')->first();
+    $lignes = $requete->borrows()->get();
+    foreach ($lignes as $value) {
+      var_dump($value);
+    }*/
     $vue = new \app\view\AppView();
     $vue->render("home");
   }
