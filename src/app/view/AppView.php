@@ -60,11 +60,45 @@ EOT;
       </div>
 EOT;
 
-    }
+}
 
 
     return $html;
     }
+
+    public function renderUserView(){
+      $html = "";
+
+      $userData = $this->data;
+      $user_name = $userData["username"];
+      $name = $userData["name"];
+      $mail = $userData["mail"];
+      $adress = $userData["adress"];
+      $city = $userData["city"];
+      $picture = $userData["picture"];
+
+      $html = <<<EOT
+      <div id="profil">
+        <form class="conntect">
+        <img src="${picture}" alt="photo de l'utilsiateur">
+          <div class="infos">
+            <input id="name" value="${name}">
+            <input id="user_name" value="${user_name}">
+            <input id="mail" value="${mail}">
+            <div id="where">
+              <input id="adress" value="${adress}">
+              <input id="city" value="${city}">
+            </div>
+          </div>
+          <button><img src="">Modifier</button>
+        </form>
+      </div>
+
+
+EOT;
+
+     return $html;
+  }
 
 
 
@@ -94,6 +128,10 @@ EOT;
     switch ($selector) {
       case 'home':
       $content = $this->renderHome();
+      break;
+
+      case 'profile':
+      $content = $this->renderUserView();
       break;
 
       default:

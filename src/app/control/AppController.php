@@ -60,4 +60,26 @@ class AppController extends \mf\control\AbstractController {
     $vue->render("home");
   }
 
+  public function viewProfile(){
+      $http = new \mf\utils\HttpRequest();
+      $user = \app\model\User::where('id', '=', $http->get['id'])->first();
+      $user_name = $user->username;
+      $name = $user->surname. " " .$user->name;
+      $mail = $user->mail;
+      $adress = $user->address;
+      $city = $user->postalcode. " " .$user->city;
+      $picture = "data:image/jpeg;base64,".base64_encode($user->photo);
+
+      $tab = array("username" => $user_name,
+        "name" => $name,
+        "mail" => $mail,
+        "adress" => $adress,
+        "city" => $city,
+        "picture" => $picture
+    );
+
+      $vueUser = new \app\view\AppView($tab);
+      $vueUser->render("profile");
+  }
+
 }
