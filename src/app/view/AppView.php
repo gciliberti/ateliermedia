@@ -17,6 +17,7 @@ class AppView extends \mf\view\AbstractView {
   *  Retourne le fragment HTML de l'entête (unique pour toutes les vues)
   */
   private function renderHeader(){
+    $html = "";
     $html.=<<<EOT
     <h1>Notre super app</h1>
 EOT;
