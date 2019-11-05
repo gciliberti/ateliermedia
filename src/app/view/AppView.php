@@ -59,10 +59,7 @@ EOT;
         </div>
       </div>
 EOT;
-
     }
-
-
     return $html;
     }
 
@@ -78,7 +75,6 @@ EOT;
       </form>
 EOT;
         return $html;
-
     }
 
 
