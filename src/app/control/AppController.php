@@ -60,4 +60,12 @@ class AppController extends \mf\control\AbstractController {
     $vue->render("home");
   }
 
+
+  public function viewMedia(){
+      $http = new \mf\utils\HttpRequest();
+      $media = \app\model\Media::where('id', '=', $http->get['id'])->get();
+      $vue = new \app\view\AppView($media);
+      $vue->render('detailMedia');
+  }
+
 }

@@ -18,5 +18,9 @@ class Media extends \Illuminate\Database\Eloquent\Model{
   public function follows(){
     return $this->belongsToMany("tweeterapp\model\User","follow","follower","followee");
   }*/
+
+
+
+
 }
  ?>
