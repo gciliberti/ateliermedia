@@ -53,7 +53,7 @@ $router->addRoute('profile',
 $router->addRoute('view',
 '/view/',
 '\app\control\AppController',
-'viewMedia',\app\auth\AppAuthentification::ACCESS_LEVEL_NONE);
+'viewMedia',\app\auth\AppAuthentification::ACCESS_LEVEL_USER);
 
 
 

@@ -34,14 +34,12 @@ Class Authentification extends AbstractAuthentification{
       if($requested > $this->access_level){
         return false;
       }
-      else{
-        return true;
-      }
+      return true;
   }
 
   public function login($mail, $db_pass,$given_pass,$level){
     if(!$this->verifyPassword($given_pass,$db_pass)){
-      throw new mf\auth\exception\AuthentificationException('Les mdp ne correspondent pas');
+      throw new \mf\auth\exception\AuthentificationException('Les mdp ne correspondent pas');
     }
     else{
       $this->updateSession($mail,$level);

@@ -16,7 +16,7 @@ class AppView extends \mf\view\AbstractView
     $app_root = (new \mf\utils\HttpRequest())->root;//Pour aller chercher les images
     $objRout = new \mf\router\Router();
     $hrefBorrow = $objRout->urlFor('borrow');
-    $hrefLogin = $objRout->urlFor('login');
+    $hrefProfile = $objRout->urlFor('profile');
     $hrefHome = $objRout->urlFor('home');
     $html.=<<<EOT
     <form class="search" action="${hrefHome}" method="post">
@@ -26,7 +26,7 @@ class AppView extends \mf\view\AbstractView
     <nav>
       <ul class="menu">
         <li><a href="${hrefBorrow}"> <img src="${app_root}/html/img/books-stack.svg" width="32" height="32" alt="Mes emprunts"> </a> </li>
-        <li><a href="${hrefLogin}">  <img src="${app_root}/html/img/user.svg" width="32" height="32" alt="Mon Profil"> </a></li>
+        <li><a href="${hrefProfile}">  <img src="${app_root}/html/img/user.svg" width="32" height="32" alt="Mon Profil"> </a></li>
       </ul>
     </nav>
 EOT;
@@ -54,17 +54,15 @@ EOT;
       $data = $this->data;
     }
 
+    $router = new \mf\router\Router();
+
     foreach ($data as $media) {
       $title = $media->title;
       $type = $media->type;
       $genre = $media->genre;
       $dispo = $media->disponibility;
       $picture = "data:image/jpeg;base64,".base64_encode($media->picture);
-
-            $router = new \mf\router\Router();
-            $hrefMedia = $router->urlFor('view', ['id' => $media->id]);
-
-
+      $hrefMedia = $router->urlFor('view', ['id' => $media->id]);
             $html .= <<<EOT
       <div class="container">
         <a href="${hrefMedia}">
@@ -108,7 +106,7 @@ EOT;
             $title = $media->title;
             $type = $media->type;
             $genre = $media->genre;
-            $picture = "data:image/jpeg;base64," . base64_encode($media->picture);
+            $picture = "data:image/jpeg;base64,".base64_encode($media->picture);
             $desc = $media->description;
             $available = $media->disponibility;
 
@@ -127,22 +125,12 @@ EOT;
         <p class="description">${desc}</p>
         <p class="available">${dispo}</p>
       </div>
-
-
-
 EOT;
-
-
         }
         return $html;
-
-
     }
 
-
-
-
-    /* Méthode renderUeserTweets
+  /* Méthode renderUeserTweets
     *
     * Vue de la fonctionalité afficher tout les Tweets d'un utilisateur donné.
     *
@@ -178,7 +166,6 @@ EOT;
                 break;
             default:
                 $content = $this->renderHome();
-
                 break;
         }
 

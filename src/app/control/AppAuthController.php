@@ -11,10 +11,10 @@ Class AppAuthController extends \mf\control\AbstractController {
 
   public function checkLogin(){
     //Recup données form
-    $post = new \mf\utils\HttpRequest;
-    if(isset($post)){
-      $mail = $post->post["mail"];
-      $password = $post->post["password"];
+    $httpReq = new \mf\utils\HttpRequest;
+    if(isset($httpReq->post['mail']) && isset($httpReq->post['password'])){
+      $mail = $httpReq->post["mail"];
+      $password = $httpReq->post["password"];
       $auth = new \app\auth\AppAuthentification();
       try{
 
@@ -22,7 +22,7 @@ Class AppAuthController extends \mf\control\AbstractController {
         \mf\router\Router::executeRoute('home');
 
       }
-      catch(mf\auth\exception\AuthentificationException $e){
+      catch(\mf\auth\exception\AuthentificationException $e){
         $this->login();
       }
 
