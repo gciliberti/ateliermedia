@@ -26,8 +26,13 @@ $router->addRoute('home',
 
 $router->addRoute('login',
 '/login/',
-'\app\control\AppController',
-'viewLogin',\app\auth\AppAuthentification::ACCESS_LEVEL_NONE);
+'\app\control\AppAuthController',
+'login',\app\auth\AppAuthentification::ACCESS_LEVEL_NONE);
+
+$router->addRoute('checklogin',
+'/checklogin/',
+'\app\control\AppAuthController',
+'checkLogin',\app\auth\AppAuthentification::ACCESS_LEVEL_NONE);
 
 $router->addRoute('register',
 '/register/',

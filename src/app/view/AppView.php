@@ -66,6 +66,21 @@ EOT;
     return $html;
     }
 
+  private function renderLogin(){
+    $obj = new \mf\router\Router();
+    $hrefSend = $obj->urlFor('checklogin');
+    $html = "";
+      $html.= <<<EOT
+      <form action="${hrefSend}" method="post" class="connect">
+          <input type="email" name="mail" id="mail" required placeholder="Mail">
+          <input type="text" name="password" id="password" required placeholder="Mot de passe">
+          <button type="submit" name="button" class="button">Envoyer</button>
+      </form>
+EOT;
+        return $html;
+
+    }
+
 
 
 
@@ -94,6 +109,10 @@ EOT;
     switch ($selector) {
       case 'home':
       $content = $this->renderHome();
+      break;
+
+      case 'login':
+      $content = $this->renderLogin();
       break;
 
       default:

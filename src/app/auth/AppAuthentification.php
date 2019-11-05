@@ -78,13 +78,16 @@ class AppAuthentification extends \mf\auth\Authentification {
      *
      */
 
-    public function loginUser($username, $password){
-      $requete = \app\model\User::select()->where('username','=',$username);
+    public function loginUser($mail, $password){
+      $requete = \app\model\User::select()->where('mail','=',$mail);
       if(empty($requete)){
-        throw new mf\auth\exception\AuthentificationException('Utilisteur non trouvé');
+        throw new \mf\auth\exception\AuthentificationException('Utilisateur non trouvé');
       }
       else{
-        $this->login($username, $password);
+        $requete = \app\model\User::select()->where('mail','=',$mail)->first();
+        $db_password = $requete->password;
+        $levelUser = $requete->level;
+        $this->login($mail,$db_password,$password,$levelUser);
       }
     }
 

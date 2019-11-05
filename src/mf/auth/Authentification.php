@@ -14,10 +14,10 @@ Class Authentification extends AbstractAuthentification{
       $this->logged_in = false;
     }
   }
-  public function updateSession($username, $level){
-    $this->user_login = $username;
+  public function updateSession($mail, $level){
+    $this->user_login = $mail;
     $this->access_level = $level;
-    $_SESSION['user_login'] = $username;
+    $_SESSION['user_login'] = $mail;
     $_SESSION['access_level'] = $level;
     $this->logged_in = true;
 
@@ -39,12 +39,12 @@ Class Authentification extends AbstractAuthentification{
       }
   }
 
-  public function login($username, $db_pass,$given_pass,$level){
+  public function login($mail, $db_pass,$given_pass,$level){
     if(!$this->verifyPassword($given_pass,$db_pass)){
       throw new mf\auth\exception\AuthentificationException('Les mdp ne correspondent pas');
     }
     else{
-      $this->updateSession($username,$level);
+      $this->updateSession($mail,$level);
 
     }
   }
