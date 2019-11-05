@@ -7,21 +7,23 @@ use mf\router\Router;
 class AppView extends \mf\view\AbstractView
 {
 
-  /* Méthode renderHeader
-  *
-  *  Retourne le fragment HTML de l'entête (unique pour toutes les vues)
-  */
-  private function renderHeader(){
-    $html = "";
-    $app_root = (new \mf\utils\HttpRequest())->root;//Pour aller chercher les images
-    $objRout = new \mf\router\Router();
-    $hrefBorrow = $objRout->urlFor('borrow');
-    $hrefProfile = $objRout->urlFor('profile');
-    $hrefHome = $objRout->urlFor('home');
-    $html.=<<<EOT
+    /* Méthode renderHeader
+    *
+    *  Retourne le fragment HTML de l'entête (unique pour toutes les vues)
+    */
+    private function renderHeader()
+    {
+        $html = "";
+        $app_root = (new \mf\utils\HttpRequest())->root;//Pour aller chercher les images
+        $objRout = new \mf\router\Router();
+        $hrefBorrow = $objRout->urlFor('borrow');
+        $hrefProfile = $objRout->urlFor('profile');
+        $hrefHome = $objRout->urlFor('home');
+        $html .= <<<EOT
+<div class="flex_container">
     <form class="search" action="${hrefHome}" method="post">
-      <input type="text" name="recherche" value="" placeholder="Rechercher">
       <input src="${app_root}/html/img/search.svg" width="32" height="32" type="image" alt="Recherche">
+      <input type="text" name="recherche" value="" placeholder="Rechercher">
     </form>
     <nav>
       <ul class="menu">
@@ -29,13 +31,14 @@ class AppView extends \mf\view\AbstractView
         <li><a href="${hrefProfile}">  <img src="${app_root}/html/img/user.svg" width="32" height="32" alt="Mon Profil"> </a></li>
       </ul>
     </nav>
+    </div>
 EOT;
         return $html;
     }
 
     /* Méthode renderFooter
     *
-    * Retourne le fragment HTML du bas de la page (unique pour toutes les vues)
+    * Retourne le fragment HTML du bas de la _template (unique pour toutes les vues)
     */
     private function renderFooter()
     {
@@ -43,16 +46,17 @@ EOT;
     }
 
 
-  private function renderHome(){//private
-    $html = "";
-    $requestedId = new \mf\utils\HttpRequest;
-    if(isset($requestedId->post['recherche'])){//Si une recherche a été effectuée
-      $recherche  = "%".$requestedId->post['recherche']."%";
+    private function renderHome()
+    {//private
+        $html = "";
+        $requestedId = new \mf\utils\HttpRequest;
+        if (isset($requestedId->post['recherche'])) {//Si une recherche a été effectuée
+            $recherche = "%" . $requestedId->post['recherche'] . "%";
 
-      $data = \app\model\Media::select()->where("title","LIKE",$recherche)->orWhere("keywords","LIKE",$recherche)->orWhere("type","LIKE",$recherche)->orWhere("genre","LIKE",$recherche)->get();
-    }else{
-      $data = $this->data;
-    }
+            $data = \app\model\Media::select()->where("title", "LIKE", $recherche)->orWhere("keywords", "LIKE", $recherche)->orWhere("type", "LIKE", $recherche)->orWhere("genre", "LIKE", $recherche)->get();
+        } else {
+            $data = $this->data;
+        }
 
     $router = new \mf\router\Router();
 

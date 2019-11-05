@@ -82,15 +82,15 @@ abstract class AbstractView {
 
     /* Méthodes render
      *
-     * cette méthode génère le code HTML d'une page complète depuis le <doctype
+     * cette méthode génère le code HTML d'une _template complète depuis le <doctype
      * jusqu'au </html>.
      *
-     * Elle dèfinit les entêtes HTML, le titre de la page et lie les feuilles
+     * Elle dèfinit les entêtes HTML, le titre de la _template et lie les feuilles
      * de style. Le contenu du document est le résultat des méthodes
      * renderBody des sous-classes.
      *
      * Elle utilise la syntaxe HEREDOC pour définir un patron et
-     * écrire la chaine de caractère de la page entière. Voir la
+     * écrire la chaine de caractère de la _template entière. Voir la
      * documentation ici:
      *
      * http://php.net/manual/fr/language.types.string.php#language.types.string.syntax.heredoc
@@ -112,7 +112,7 @@ abstract class AbstractView {
         $body = $this->renderBody($selector);
 
 
-        /* construire la structure de la page
+        /* construire la structure de la _template
          *
          *  Noter l'utilisation des variables ${title} ${style} et ${body}
          *
@@ -122,6 +122,7 @@ abstract class AbstractView {
 <!DOCTYPE html>
 <html lang="fr">
     <head>
+        <meta name="viewport" content="width=device-width, user-scalable=no">
         <meta charset="utf-8">
         <title>${title}</title>
 	    ${styles}
@@ -135,7 +136,7 @@ abstract class AbstractView {
 </html>
 EOT;
 
-        /* Affichage de la page
+        /* Affichage de la _template
          *
          * C'est la seule instruction echo dans toute l'application
          */
