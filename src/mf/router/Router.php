@@ -27,8 +27,6 @@ class Router extends AbstractRouter{
      $mth = self::$routes[$pathDefault][1];
 
      $accesstest = new \mf\auth\Authentification();
-     var_dump(self::$routes);
-
      if(isset(self::$routes[$path]) && $accesstest->checkAccessRight(self::$routes[$path][2]))
      {
        $ctrl = self::$routes[$path][0];

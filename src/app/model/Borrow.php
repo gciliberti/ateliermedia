@@ -1,14 +1,10 @@
 <?php
 namespace app\model;
 
-class User extends \Illuminate\Database\Eloquent\Model{
-  protected $table ='user';
+class Borrow extends \Illuminate\Database\Eloquent\Model{
+  protected $table ='borrow';
   protected $primaryKey = 'id';
   public $timestamps = false;
-
-  public function borrows(){
-    return $this->hasMany('app\model\Borrow','id_user');
-  }
 
   /*public function liked(){
     return $this->belongsToMany("tweeterapp\model\Tweet","like","user_id","tweet_id");
