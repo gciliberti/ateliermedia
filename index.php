@@ -8,9 +8,11 @@ $loader = new \mf\utils\ClassLoader('src');
 $loader->register();
 $array = parse_ini_file("conf/config.ini");
 
-\app\view\AppView::addStyleSheet("html/css/style.css");
-\app\view\AppView::addStyleSheet("html/css/bootstrap.css");
-\app\view\AppView::addStyleSheet("html/css/bootstrap-grid.css");
+//\app\view\AppView::addStyleSheet("html/css/style.css");
+//\app\view\AppView::addStyleSheet("html/css/bootstrap.css");
+//\app\view\AppView::addStyleSheet("html/css/bootstrap-grid.css");
+\app\view\AppView::addStyleSheet("html/css/main.css");
+
 
 $db = new \Illuminate\Database\Capsule\Manager();
 $db->addConnection($array);
