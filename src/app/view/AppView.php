@@ -16,7 +16,7 @@ class AppView extends \mf\view\AbstractView
     $app_root = (new \mf\utils\HttpRequest())->root;//Pour aller chercher les images
     $objRout = new \mf\router\Router();
     $hrefBorrow = $objRout->urlFor('borrow');
-    $hrefProfile = $objRout->urlFor('profile');
+    $hrefLogin = $objRout->urlFor('login');
     $hrefHome = $objRout->urlFor('home');
     $html.=<<<EOT
     <form class="search" action="${hrefHome}" method="post">
@@ -26,7 +26,7 @@ class AppView extends \mf\view\AbstractView
     <nav>
       <ul class="menu">
         <li><a href="${hrefBorrow}"> <img src="${app_root}/html/img/books-stack.svg" width="32" height="32" alt="Mes emprunts"> </a> </li>
-        <li><a href="${hrefProfile}">  <img src="${app_root}/html/img/user.svg" width="32" height="32" alt="Mon Profil"> </a></li>
+        <li><a href="${hrefLogin}">  <img src="${app_root}/html/img/user.svg" width="32" height="32" alt="Mon Profil"> </a></li>
       </ul>
     </nav>
 EOT;
@@ -82,10 +82,21 @@ EOT;
         </div>
       </div>
 EOT;
+    }
+    return $html;
+    }
 
-        }
-
-
+  private function renderLogin(){
+    $obj = new \mf\router\Router();
+    $hrefSend = $obj->urlFor('checklogin');
+    $html = "";
+      $html.= <<<EOT
+      <form action="${hrefSend}" method="post" class="connect">
+          <input type="email" name="mail" id="mail" required placeholder="Mail">
+          <input type="password" name="password" id="password" required placeholder="Mot de passe">
+          <button type="submit" name="button" class="button">Envoyer</button>
+      </form>
+EOT;
         return $html;
     }
 
@@ -106,7 +117,6 @@ EOT;
             } else {
                 $dispo = "Indisponible";
             }
-
 
             $html .= <<<EOT
 
@@ -138,7 +148,6 @@ EOT;
     *
     */
 
-
     /* Méthode renderBody
     *
     * Retourne la framgment HTML de la balise <body> elle est appelée
@@ -154,15 +163,19 @@ EOT;
         *
         */
         $content = "";
-        $navBar = $this->renderHeader();
+        $navBar = "";
         switch ($selector) {
             case 'home':
+                $navBar = $this->renderHeader();
                 $content = $this->renderHome();
                 break;
             case 'detailMedia':
+                $navBar = $this->renderHeader();
                 $content = $this->renderMedia();
                 break;
-
+            case 'login':
+                $content = $this->renderLogin();
+                break;
             default:
                 $content = $this->renderHome();
 
