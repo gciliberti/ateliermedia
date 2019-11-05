@@ -52,7 +52,11 @@ class AppController extends \mf\control\AbstractController {
     foreach ($lignes as $value) {
       var_dump($value);
     }*/
-    $vue = new \app\view\AppView();
+    $medias = \app\model\Media::select()->get();
+
+
+
+    $vue = new \app\view\AppView($medias);
     $vue->render("home");
     $requestedId = new \mf\utils\HttpRequest;
     if(isset($requestedId->post['recherche'])){

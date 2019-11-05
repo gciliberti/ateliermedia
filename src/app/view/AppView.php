@@ -46,24 +46,37 @@ EOT;
     return 'La super app créée en Licence Pro &copy;2019';
   }
 
-  /* Méthode renderHome
-  *
-  * Vue de la fonctionalité afficher tous les Tweets.
-  *
-  */
 
   private function renderHome(){//private
-
-    /*
-    * Retourne le fragment HTML qui affiche tous les Tweets.
-    *
-    * L'attribut $this->data contient un tableau d'objets tweet.
-    *
-    */
     $html = "";
+
+    foreach ($this->data as $media) {
+      $title = $media->title;
+      $type = $media->type;
+      $genre = $media->genre;
+      $dispo = $media->disponibility;
+      $picture = "data:image/jpeg;base64,".base64_encode($media->picture);
+
+
       $html.= <<<EOT
-      <p>Corp de la page</p>
+      <div class="container">
+        <div class="item">
+          <div class="item__img">
+            <img src="${picture}" alt="${type}">
+          </div>
+          <div class="item__info">
+            <h3 class="title">${title}</h3>
+            <p class="type">${type} / ${genre}</p>
+            <p class="available">${dispo}</p>
+          </div>
+          <!-- boîte à répeter autant de fois qu'il le faut-->
+        </div>
+      </div>
 EOT;
+
+    }
+
+
     return $html;
     }
 
