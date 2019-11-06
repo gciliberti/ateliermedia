@@ -46,15 +46,24 @@ class AppAuthentification extends \mf\auth\Authentification {
      *
      */
 
-    public function createUser($username, $pass, $fullname,$level=self::ACCESS_LEVEL_USER) {
-      $requeteTw = \app\model\User::select()->where('username','=',$username)->first();
-      if($requeteTw == $username){
-        throw new mf\auth\exception\AuthentificationException('Nom existant en BDD');
+    public function createUser($mail,$name,$surname,$username,$address,$postalcode,$city,$phone, $password,$level=self::ACCESS_LEVEL_USER) {
+      $user = \app\model\User::select()->where('mail','=',$mail)->first();
+      if($user == $username){
+        throw new mf\auth\exception\AuthentificationException('Mail existant en BDD');
       }
       else{
         $newuser = new \app\model\User ;
-        $newuser->fullname = $fullname;
-        $newuser->pass = $this->hashPassword($password);
+        $newuser->password = $this->hashPassword($password);
+        $newuser->surname = $surname;
+        $newuser->name = $name;
+        $newuser->mail = $mail;
+        $newuser->phone = $phone;
+        $newuser->address = $address;
+        $newuser->postalcode = $postalcode;
+        $newuser->city = $city;
+        $newuser->subscription_date = $date = date('Y-m-d H:i:s');
+        $newuser->isvalidate = 0;
+        $newuser->level = self::ACCESS_LEVEL_USER;
         $newuser->username = $username;
         $newuser->save();
       }

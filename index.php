@@ -24,7 +24,7 @@ $router = new \mf\router\Router();
 $router->addRoute('home',
 '/home/',
 '\app\control\AppController',
-'viewHome',\app\auth\AppAuthentification::ACCESS_LEVEL_NONE);
+'viewHome',\app\auth\AppAuthentification::ACCESS_LEVEL_USER);
 
 $router->addRoute('login',
 '/login/',
@@ -38,8 +38,13 @@ $router->addRoute('checklogin',
 
 $router->addRoute('register',
 '/register/',
-'\app\control\AppController',
-'viewRegister',\app\auth\AppAuthentification::ACCESS_LEVEL_NONE);
+'\app\control\AppAuthController',
+'register',\app\auth\AppAuthentification::ACCESS_LEVEL_NONE);
+
+$router->addRoute('checkregister',
+'/checkregister/',
+'\app\control\AppAuthController',
+'checkRegister',\app\auth\AppAuthentification::ACCESS_LEVEL_NONE);
 
 $router->addRoute('borrow',
 '/borrow/',
@@ -49,25 +54,24 @@ $router->addRoute('borrow',
 $router->addRoute('profile',
 '/profile/',
 '\app\control\AppController',
-'viewProfile',\app\auth\AppAuthentification::ACCESS_LEVEL_USER);
-
+'viewProfile',\app\auth\AppAuthentification::ACCESS_LEVEL_NONE);
 
 $router->addRoute('view',
 '/view/',
 '\app\control\AppController',
 'viewMedia',\app\auth\AppAuthentification::ACCESS_LEVEL_USER);
 
+$router->addRoute('logout',
+'/logout/',
+'\app\control\AppAuthController',
+'logout',\app\auth\AppAuthentification::ACCESS_LEVEL_USER);
 
-
-
-
+$router->addRoute('modify',
+          '/modify/',
+          '\app\control\AppController',
+          'viewModify',\app\auth\AppAuthentification::ACCESS_LEVEL_USER);
 
 $router->setDefaultRoute('/home/');
 
 
 $router->run();
-
-//echo $router->urlFor("maison",["id"=>5,"author"=>4,"test"=>6]);
-
-/* Après exécution de cette instruction, l'attribut statique $routes et
-$aliases de la classe Router auront les valeurs suivantes: */
