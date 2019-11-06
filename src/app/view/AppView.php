@@ -131,8 +131,13 @@ EOT;
         $html = <<<EOT
         <div id="profil">
           <form class="conntect" method="post" action="{$urlB}" enctype="multipart/form-data">
-          <img src="${picture}" width="64" height="64" alt="photo de l'utilisateur">
-          <input type="file" name="fileToUpload" accept="image/png, image/gif, image/jpeg" id="fileToUpload">
+            <div id="image">
+             <div>
+                <img src="${picture}" width="64" height="64" alt="photo de l'utilisateur">
+              </div>
+              <label for="file" class="label-file">parcourir...</label>
+              <input id="file" type="file" name="fileToUpload" accept="image/png, image/gif, image/jpeg" id="fileToUpload">
+            </div>
             <div class="infos">
               <input id="name" name="name" value="${surname}">
               <input id="surname" name="surname" value="${name}">
@@ -144,7 +149,7 @@ EOT;
                 <input id="city"name="city" value="${city}">
               </div>
             </div>
-            <input type="submit" value="valider">
+            <input class="button-empty" type="submit" value="valider">
           </form>
         </div>
 EOT;
@@ -152,7 +157,9 @@ EOT;
       $html = <<<EOT
       <div id="profil">
         <form class="conntect">
-        <img src="${picture}" width="64" height="64" alt="photo de l'utilisateur">
+          <div id="image">
+            <img src="${picture}" width="64" height="64" alt="photo de l'utilisateur">
+          </div>
           <div class="infos">
             <p>${name_sur}</p>
             <p>${user_name}</p>
@@ -162,7 +169,7 @@ EOT;
             <p>${city_post}</p>
             </div>
           </div>
-          <a href="${url}"><img src=""><input type="button" value="modifier"></a>
+          <a href="${url}"><img src=""><input class="button-empty" type="button" value="modifier"></a>
         </form>
       </div>
 EOT;
