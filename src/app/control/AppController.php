@@ -53,11 +53,14 @@ class AppController extends \mf\control\AbstractController {
       var_dump($value);
     }*/
     $medias = \app\model\Media::select()->get();
+    if(isset($_SESSION['access_level'])){
+      $vue = new \app\view\AppView($medias);
+      $vue->render("home");
+    }
+    else{
+      \mf\router\Router::executeRoute('login');
+    }
 
-
-
-    $vue = new \app\view\AppView($medias);
-    $vue->render("home");
   }
 
 

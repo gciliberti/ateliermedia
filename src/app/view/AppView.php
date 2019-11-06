@@ -91,11 +91,16 @@ EOT;
   private function renderLogin(){
     $obj = new \mf\router\Router();
     $hrefSend = $obj->urlFor('checklogin');
+    $error = '';
+    if(null !== $this->data){
+      $error = "<p>".$this->data->getMessage()."</p>";
+    }
     $html = "";
       $html.= <<<EOT
       <form action="${hrefSend}" method="post" class="connect">
           <input type="email" name="mail" id="mail" required placeholder="Mail">
           <input type="password" name="password" id="password" required placeholder="Mot de passe">
+          ${error}
           <button type="submit" name="button" class="button">Envoyer</button>
       </form>
 EOT;
@@ -134,18 +139,31 @@ EOT;
         return $html;
     }
 
-  /* Méthode renderUeserTweets
-    *
-    * Vue de la fonctionalité afficher tout les Tweets d'un utilisateur donné.
-    *
-    */
 
-    /* Méthode renderBody
-    *
-    * Retourne la framgment HTML de la balise <body> elle est appelée
-    * par la méthode héritée render.
-    *
-    */
+    private function renderRegister()
+      {
+        $obj = new \mf\router\Router();
+        $hrefSend = $obj->urlFor('checkregister');
+        $html = "";
+          $html.= <<<EOT
+          <main id="sign_in">
+            <form action="${hrefSend}" method="post" class="sign_in">
+                <input type="text" name="mail" id="mail" required placeholder="Mail">
+                <input type="text" name="name" id="name" required placeholder="Prenom">
+                <input type="text" name="surname" id="surname" required placeholder="Nom">
+                <input type="text" name="username" id="username" required placeholder="Nom d'utilisateur">
+                <input type="text" name="address" id="address" required placeholder="Adresse">
+                <input type="text" name="postalcode" id="postalcode" required placeholder="Code postal">
+                <input type="text" name="city" id="city" required placeholder="Ville">
+                <input type="tel" name="phone" id="phone" required placeholder="Tel">
+                <input type="text" name="password" id="password" required placeholder="Mot de passe">
+                <button type="submit" name="button" class="button">Envoyer</button>
+            </form>
+          </main>
+EOT;
+          return $html;
+        }
+
 
     protected function renderBody($selector)
     {
@@ -168,6 +186,11 @@ EOT;
             case 'login':
                 $content = $this->renderLogin();
                 break;
+
+            case 'register':
+                $content = $this->renderRegister();
+                break;
+
             default:
                 $content = $this->renderHome();
                 break;

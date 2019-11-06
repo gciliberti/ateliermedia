@@ -24,7 +24,7 @@ $router = new \mf\router\Router();
 $router->addRoute('home',
 '/home/',
 '\app\control\AppController',
-'viewHome',\app\auth\AppAuthentification::ACCESS_LEVEL_NONE);
+'viewHome',\app\auth\AppAuthentification::ACCESS_LEVEL_USER);
 
 $router->addRoute('login',
 '/login/',
@@ -38,8 +38,13 @@ $router->addRoute('checklogin',
 
 $router->addRoute('register',
 '/register/',
-'\app\control\AppController',
-'viewRegister',\app\auth\AppAuthentification::ACCESS_LEVEL_NONE);
+'\app\control\AppAuthController',
+'register',\app\auth\AppAuthentification::ACCESS_LEVEL_NONE);
+
+$router->addRoute('checkregister',
+'/checkregister/',
+'\app\control\AppAuthController',
+'checkRegister',\app\auth\AppAuthentification::ACCESS_LEVEL_NONE);
 
 $router->addRoute('borrow',
 '/borrow/',
@@ -57,6 +62,10 @@ $router->addRoute('view',
 '\app\control\AppController',
 'viewMedia',\app\auth\AppAuthentification::ACCESS_LEVEL_USER);
 
+$router->addRoute('logout',
+'/logout/',
+'\app\control\AppAuthController',
+'logout',\app\auth\AppAuthentification::ACCESS_LEVEL_USER);
 
 
 
