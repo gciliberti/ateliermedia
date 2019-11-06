@@ -75,8 +75,3 @@ $router->setDefaultRoute('/home/');
 
 
 $router->run();
-
-//echo $router->urlFor("maison",["id"=>5,"author"=>4,"test"=>6]);
-
-/* Après exécution de cette instruction, l'attribut statique $routes et
-$aliases de la classe Router auront les valeurs suivantes: */

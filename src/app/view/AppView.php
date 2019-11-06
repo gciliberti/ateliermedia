@@ -19,6 +19,7 @@ class AppView extends \mf\view\AbstractView
         $hrefBorrow = $objRout->urlFor('borrow');
         $hrefProfile = $objRout->urlFor('profile');
         $hrefHome = $objRout->urlFor('home');
+        $hrefLogout = $objRout->urlFor('logout');
         $html .= <<<EOT
 <div class="flex_container">
     <form class="search" action="${hrefHome}" method="post">
@@ -29,6 +30,7 @@ class AppView extends \mf\view\AbstractView
       <ul class="menu">
         <li><a href="${hrefBorrow}"> <img src="${app_root}/html/img/books-stack.svg" width="32" height="32" alt="Mes emprunts"> </a> </li>
         <li><a href="${hrefProfile}">  <img src="${app_root}/html/img/user.svg" width="32" height="32" alt="Mon Profil"> </a></li>
+        <li><a href="${hrefLogout}">  <img src="${app_root}/html/img/logout.svg" width="32" height="32" alt="Mon Profil"> </a></li>
       </ul>
     </nav>
     </div>
