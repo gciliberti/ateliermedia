@@ -22,6 +22,17 @@ html {
     display: flex;
   }
 
+  .button-empty{
+    text-align: center;
+    width: 100%;
+    padding: 5px 0;
+    display: block;
+    margin: auto;
+    color: $primarycolor;
+    background-color: white;
+    border: 1px solid $primarycolor;
+    border-radius: 5px;
+  }
   .flex_item {
     display: flex;
   }
@@ -58,5 +69,21 @@ html {
     }
   }
 
-}
+  input{
+    border: none;
+    border-bottom: solid 1px $primarycolor;
+    background-color: #F7F7F7;
+    margin-bottom: 15px;
+    height: 2em;
+    &:focus{
+      outline: none;
+    }
+    input{
+      background-color: transparent;
+      border: none;
+      color: $primarycolor;
+    }
+  }
 
+
+}
