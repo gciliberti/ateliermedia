@@ -242,6 +242,8 @@ EOT;
   private function renderLogin(){
     $obj = new \mf\router\Router();
     $hrefSend = $obj->urlFor('checklogin');
+    $hrefRegister = $obj->urlFor('register');
+
     $error = '';
     if(null !== $this->data){
       $error = "<p>".$this->data->getMessage()."</p>";
@@ -254,6 +256,12 @@ EOT;
           ${error}
           <button type="submit" name="button" class="button">Envoyer</button>
       </form>
+      <div class = "register">
+        <p>
+          Pas encore de compte?
+          <a href="${hrefRegister}">Inscription</a>
+        </p>
+      </div>
 EOT;
         return $html;
     }
@@ -308,6 +316,7 @@ EOT;
                 $content = $this->renderBorrow();
                 break;
             case 'register':
+                $navBar = $this->renderHeaderBack();
                 $content = $this->renderRegister();
                 break;
 
