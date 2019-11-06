@@ -4,17 +4,23 @@
 // initialisation des variables
 
 $primarycolor: #34B3AA;
-$secondarycolor: #787878;
+$secondarycolor: #707070;
 $terciarycolor: #E8E8E8;
 $quartuarycolor: #F3F3F3;
-$bc: #FCF2E8;
+
+$dispo_color: #43AB28;
+$indispo_color: #E12012;
+$retour_color: #E1A912;
+$bc: #F5F5F5;
 $font: 'Roboto', sans-serif;
+$font_color: #303030;
 
 
 html {
   font-family: 'Roboto', sans-serif;
+  color: $font_color;
 
-  main{
+  main {
     height: auto;
   }
 
@@ -22,26 +28,20 @@ html {
     display: flex;
   }
 
-  .button-empty{
-    text-align: center;
-    width: 100%;
-    padding: 5px 0;
-    display: block;
-    margin: auto;
-    color: $primarycolor;
-    background-color: white;
-    border: 1px solid $primarycolor;
-    border-radius: 5px;
-  }
+
   .flex_item {
     display: flex;
+  }
+
+  .grid_container {
+    display: grid;
   }
 
 
   //border item search
 
   .flex_item.green {
-    border-right: 3px solid darkgreen;
+    border-right: 3px solid $dispo_color;
 
     .item__info {
       p:last-of-type {
@@ -51,7 +51,7 @@ html {
   }
 
   .flex_item.red {
-    border-right: 3px solid red;
+    border-right: 3px solid $indispo_color;
 
     .item__info {
       p:last-of-type {
@@ -61,7 +61,8 @@ html {
   }
 
   .flex_item.orange {
-    border-right: 3px solid orange;
+    border-right: 3px solid $retour_color;
+
     .item__info {
       p:last-of-type {
         color: orange;
@@ -69,20 +70,40 @@ html {
     }
   }
 
-  input{
+  input {
     border: none;
-    border-bottom: solid 1px $primarycolor;
+    border-bottom: solid 2px $primarycolor;
     background-color: #F7F7F7;
-    margin-bottom: 15px;
-    height: 2em;
-    &:focus{
-      outline: none;
-    }
-    input{
-      background-color: transparent;
-      border: none;
-      color: $primarycolor;
-    }
+    margin: 8% auto 8% auto;
+    height: 3em;
+    display: block;
+    width: 65%;
+  }
+
+  .button_full {
+    width: 65%;
+    padding: 8px 0;
+    margin: 12% auto 0 auto;
+    display: block;
+    border-radius: 5px;
+    border: none;
+    background-color: $primarycolor;
+    color: white;
+    font-family: $font;
+    font-size: 1.2em;
+
+  }
+
+  .button-empty {
+    text-align: center;
+    width: 100%;
+    padding: 5px 0;
+    display: block;
+    margin: auto;
+    color: $primarycolor;
+    background-color: white;
+    border: 2px solid $primarycolor;
+    border-radius: 5px;
   }
 
 

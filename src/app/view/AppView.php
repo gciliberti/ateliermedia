@@ -60,7 +60,7 @@ EOT;
 
     private function renderHome()//nav bar
     {
-        $html = "";
+        $html = "<div class='grid_container'>";
         $requestedId = new \mf\utils\HttpRequest;
         if (isset($requestedId->post['recherche'])) {//Si une recherche a été effectuée
             $recherche = "%" . $requestedId->post['recherche'] . "%";
@@ -78,12 +78,6 @@ EOT;
             $type = $media->type;
             $genre = $media->genre;
             $dispo = $media->disponibility;
-
-//            var_dump($borrow);
-
-
-//            $date_retour = $media->borrow();
-//            var_dump($date_retour);
             if ($dispo == 1) {
                 $dispo = 'Disponible';
                 $border_class = 'green';
@@ -123,6 +117,7 @@ EOT;
       </div>
 EOT;
         }
+        $html.='</div>';
         return $html;
 
     }
@@ -301,8 +296,7 @@ EOT;
         $hrefSend = $obj->urlFor('checkregister');
         $html = "";
         $html .= <<<EOT
-          <main id="sign_in">
-            <form action="${hrefSend}" method="post" class="sign_in">
+            <form action="${hrefSend}" method="post" class="sign_in grid_container">
                 <input type="text" name="mail" id="mail" required placeholder="Mail">
                 <input type="text" name="name" id="name" required placeholder="Prenom">
                 <input type="text" name="surname" id="surname" required placeholder="Nom">
@@ -312,9 +306,8 @@ EOT;
                 <input type="text" name="city" id="city" required placeholder="Ville">
                 <input type="tel" name="phone" id="phone" required placeholder="Tel">
                 <input type="text" name="password" id="password" required placeholder="Mot de passe">
-                <button type="submit" name="button" class="button">Envoyer</button>
+                <button type="submit" name="button" class="button_full">Envoyer</button>
             </form>
-          </main>
 EOT;
         return $html;
     }
@@ -356,6 +349,8 @@ EOT;
                 break;
             case 'register':
                 $content = $this->renderRegister();
+                $identifiant = "register";
+                $title = '<h1>Inscription</h1>';
                 break;
 
             default:

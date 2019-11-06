@@ -1,10 +1,46 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 html {
-  font-family: 'Roboto', sans-serif; }
+  font-family: 'Roboto', sans-serif;
+  color: #303030; }
   html main {
     height: auto; }
   html .flex_container {
     display: flex; }
+  html .flex_item {
+    display: flex; }
+  html .grid_container {
+    display: grid; }
+  html .flex_item.green {
+    border-right: 3px solid #43AB28; }
+    html .flex_item.green .item__info p:last-of-type {
+      color: darkgreen; }
+  html .flex_item.red {
+    border-right: 3px solid #E12012; }
+    html .flex_item.red .item__info p:last-of-type {
+      color: red; }
+  html .flex_item.orange {
+    border-right: 3px solid #E1A912; }
+    html .flex_item.orange .item__info p:last-of-type {
+      color: orange; }
+  html input {
+    border: none;
+    border-bottom: solid 2px #34B3AA;
+    background-color: #F7F7F7;
+    margin: 8% auto 8% auto;
+    height: 3em;
+    display: block;
+    width: 65%; }
+  html .button_full {
+    width: 65%;
+    padding: 8px 0;
+    margin: 12% auto 0 auto;
+    display: block;
+    border-radius: 5px;
+    border: none;
+    background-color: #34B3AA;
+    color: white;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.2em; }
   html .button-empty {
     text-align: center;
     width: 100%;
@@ -13,34 +49,8 @@ html {
     margin: auto;
     color: #34B3AA;
     background-color: white;
-    border: 1px solid #34B3AA;
+    border: 2px solid #34B3AA;
     border-radius: 5px; }
-  html .flex_item {
-    display: flex; }
-  html .flex_item.green {
-    border-right: 3px solid darkgreen; }
-    html .flex_item.green .item__info p:last-of-type {
-      color: darkgreen; }
-  html .flex_item.red {
-    border-right: 3px solid red; }
-    html .flex_item.red .item__info p:last-of-type {
-      color: red; }
-  html .flex_item.orange {
-    border-right: 3px solid orange; }
-    html .flex_item.orange .item__info p:last-of-type {
-      color: orange; }
-  html input {
-    border: none;
-    border-bottom: solid 1px #34B3AA;
-    background-color: #F7F7F7;
-    margin-bottom: 15px;
-    height: 2em; }
-    html input:focus {
-      outline: none; }
-    html input input {
-      background-color: transparent;
-      border: none;
-      color: #34B3AA; }
 
 html {
   margin: 0;
@@ -48,7 +58,7 @@ html {
   html body {
     margin: 0;
     padding: 0;
-    background-color: white; }
+    background-color: #F5F5F5; }
   html ul {
     padding: 0;
     margin: 0;
@@ -58,7 +68,11 @@ html {
     text-decoration: none; }
   html h1, html h2, html h3, html h4 {
     margin: 0;
-    color: #787878; }
+    color: #707070; }
+  html input {
+    background-color: #E8E8E8; }
+    html input:focus {
+      outline: none; }
 
 header {
   width: 100%;
@@ -82,54 +96,64 @@ header {
     margin-top: 15px;
     padding: 5px;
     height: auto;
-    background-color: white;
     border-radius: 10px;
-    display: flex; }
-    header form.search input:first-of-type {
-      width: 24px;
-      height: 24px;
-      position: relative;
-      top: 0;
-      left: 0; }
-    header form.search input:last-child {
-      border: 0;
-      font-weight: lighter;
-      font-size: 1.3em;
-      padding-left: 15px;
-      width: 80%;
-      color: #787878; }
-      header form.search input:last-child:focus {
-        outline: none; }
+    display: flex;
+    text-align: center;
+    justify-content: center; }
+    header form.search input {
+      background-color: #F5F5F5; }
+      header form.search input:first-of-type {
+        width: 24px;
+        height: 24px;
+        position: relative;
+        border: none;
+        top: 20px;
+        left: 0;
+        margin: 0; }
+      header form.search input:last-child {
+        border: 0;
+        font-weight: lighter;
+        font-size: 1.3em;
+        padding-left: 15px;
+        width: 80%;
+        color: #787878;
+        margin: 0; }
 
 body main#search img {
   max-width: 100%;
   height: auto; }
-body main#search .container {
+@media (min-width: 768px) {
+  body main#search .grid_container {
+    grid-template-columns: repeat(12, 1fr); } }
+body main#search .grid_container .container {
   width: 100%; }
-  body main#search .container a .flex_item {
+  @media (min-width: 768px) {
+    body main#search .grid_container .container {
+      grid-column: 3 span; } }
+  body main#search .grid_container .container a .flex_item {
     background-color: #E8E8E8;
     width: 95%;
     margin-left: auto;
     margin-right: auto;
     justify-content: start;
     margin-bottom: 15px; }
-    body main#search .container a .flex_item .item__img {
+    body main#search .grid_container .container a .flex_item .item__img {
       width: 20%;
       padding: 10px;
       background-color: #F3F3F3; }
-      body main#search .container a .flex_item .item__img img {
+      body main#search .grid_container .container a .flex_item .item__img img {
         width: 100%;
         height: auto;
         vertical-align: middle; }
-    body main#search .container a .flex_item .item__info {
+    body main#search .grid_container .container a .flex_item .item__info {
       padding-left: 10px;
       width: 80%; }
-      body main#search .container a .flex_item .item__info p {
+      body main#search .grid_container .container a .flex_item .item__info p {
         width: 100%; }
-        body main#search .container a .flex_item .item__info p:first-of-type {
-          color: #787878;
+        body main#search .grid_container .container a .flex_item .item__info p:first-of-type {
+          color: #707070;
           margin-left: 3px; }
-        body main#search .container a .flex_item .item__info p:last-of-type {
+        body main#search .grid_container .container a .flex_item .item__info p:last-of-type {
           text-align: right;
           margin-top: 50px;
           margin-bottom: 0;
@@ -138,27 +162,6 @@ body main#search .container {
 body main#login form.connect {
   margin-top: 30vh;
   transform: translateY(-50%); }
-  body main#login form.connect input {
-    border: none;
-    border-bottom: solid 2px #34B3AA;
-    background-color: #F7F7F7;
-    margin: 8% auto 8% auto;
-    height: 3em;
-    display: block;
-    width: 65%; }
-    body main#login form.connect input:focus {
-      outline: none; }
-  body main#login form.connect .button_full {
-    width: 65%;
-    padding: 8px 0;
-    margin: 12% auto 0 auto;
-    display: block;
-    border-radius: 5px;
-    border: none;
-    background-color: #34B3AA;
-    color: white;
-    font-family: "Roboto", sans-serif;
-    font-size: 1.2em; }
 body main#login nav {
   height: 15vh;
   margin-top: 15vw;
@@ -167,10 +170,10 @@ body main#login nav {
     content: "";
     display: block;
     position: relative;
-    left: 35%;
-    height: 5vh;
-    width: 30%;
-    border-bottom: 2px solid #787878; }
+    left: 30%;
+    top: -5vh;
+    width: 40%;
+    border-bottom: 2px solid #707070; }
   body main#login nav p {
     font-size: 1.1em; }
     body main#login nav p a {
@@ -181,12 +184,27 @@ body header {
   width: 100%;
   height: auto; }
   body header h1 {
-    color: #787878;
+    color: #707070;
     width: 100%;
     text-align: center;
     font-size: 2em;
     margin-top: 5vh;
     margin-bottom: 10px; }
+
+@media (min-width: 768px) {
+  body main#register {
+    margin-top: 35vh;
+    transform: translateY(-50%); } }
+@media (min-width: 768px) {
+  body main#register form.grid_container {
+    grid-template-columns: repeat(12, 1fr); } }
+body main#register form.grid_container input {
+  margin-bottom: 2%;
+  margin-top: 3%; }
+  body main#register form.grid_container input:nth-child(-n+10) {
+    grid-column: 6 span; }
+body main#register form.grid_container button {
+  grid-column: 6 span; }
 
 #profil {
   margin-top: 50vh;

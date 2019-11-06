@@ -1,0 +1,34 @@
+body {
+  main#register {
+    @include md() {
+      margin-top: 35vh;
+      transform: translateY(-50%);
+
+    }
+
+    form.grid_container {
+
+      @include md() {
+        grid-template-columns: repeat(12, 1fr);
+      }
+
+      input {
+        margin-bottom: 2%;
+        margin-top: 3%;
+
+
+        &:nth-child(-n+10) {
+          grid-column: 6 span;
+        }
+
+
+      }
+
+      button {
+        grid-column: 6 span;
+
+      }
+
+    }
+  }
+}

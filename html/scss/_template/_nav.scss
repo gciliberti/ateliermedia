@@ -37,30 +37,34 @@ header {
     margin-top: 15px;
     padding: 5px;
     height: auto;
-    background-color: white;
+
     border-radius: 10px;
     display: flex;
+    text-align: center;
+    justify-content: center;
 
 
-    input:first-of-type {
-      width: 24px;
-      height: 24px;
-      position: relative;
-      top: 0;
-      left: 0;
+    input {
+      background-color: $bc;
+      &:first-of-type {
+        width: 24px;
+        height: 24px;
+        position: relative;
+        border: none;
+        top: 20px;
+        left: 0;
+        margin: 0;
 
-    }
+      }
 
-    input:last-child {
-      border: 0;
-      font-weight: lighter;
-      font-size: 1.3em;
-      padding-left: 15px;
-      width: 80%;
-      color: #787878;
-
-      &:focus {
-        outline: none;
+      &:last-child {
+        border: 0;
+        font-weight: lighter;
+        font-size: 1.3em;
+        padding-left: 15px;
+        width: 80%;
+        color: #787878;
+        margin: 0;
       }
     }
   }
