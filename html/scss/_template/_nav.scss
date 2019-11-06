@@ -1,0 +1,31 @@
+header {
+  width: 100%;
+  height: auto;
+
+  h1 {
+    font-size: 1em;
+  }
+
+  form {
+    margin-top: 5px;
+    margin-left: 5px;
+    height: auto;
+
+    input:first-of-type {
+      width: 24px;
+      height: 24px;
+      position: relative;
+      top: 3%;
+      left: 3%;
+
+    }
+
+    input:last-child {
+      border: 0;
+      color: $terciarycolor;
+      font-weight: lighter;
+      font-size: 1.3em;
+      padding-left: 15px;
+    }
+  }
+}

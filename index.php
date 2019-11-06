@@ -8,9 +8,11 @@ $loader = new \mf\utils\ClassLoader('src');
 $loader->register();
 $array = parse_ini_file("conf/config.ini");
 
-\app\view\AppView::addStyleSheet("html/css/style.css");
-\app\view\AppView::addStyleSheet("html/css/bootstrap.css");
-\app\view\AppView::addStyleSheet("html/css/bootstrap-grid.css");
+//\app\view\AppView::addStyleSheet("html/css/style.css");
+//\app\view\AppView::addStyleSheet("html/css/bootstrap.css");
+//\app\view\AppView::addStyleSheet("html/css/bootstrap-grid.css");
+\app\view\AppView::addStyleSheet("html/css/main.css");
+
 
 $db = new \Illuminate\Database\Capsule\Manager();
 $db->addConnection($array);
@@ -26,8 +28,13 @@ $router->addRoute('home',
 
 $router->addRoute('login',
 '/login/',
-'\app\control\AppController',
-'viewLogin',\app\auth\AppAuthentification::ACCESS_LEVEL_NONE);
+'\app\control\AppAuthController',
+'login',\app\auth\AppAuthentification::ACCESS_LEVEL_NONE);
+
+$router->addRoute('checklogin',
+'/checklogin/',
+'\app\control\AppAuthController',
+'checkLogin',\app\auth\AppAuthentification::ACCESS_LEVEL_NONE);
 
 $router->addRoute('register',
 '/register/',
@@ -44,16 +51,15 @@ $router->addRoute('profile',
 '\app\control\AppController',
 'viewProfile',\app\auth\AppAuthentification::ACCESS_LEVEL_NONE);
 
-
 $router->addRoute('view',
 '/view/',
 '\app\control\AppController',
 'viewMedia',\app\auth\AppAuthentification::ACCESS_LEVEL_USER);
 
-
-
-
-
+$router->addRoute('modify',
+          '/modify/',
+          '\app\control\AppController',
+          'viewModify',\app\auth\AppAuthentification::ACCESS_LEVEL_USER);
 
 $router->setDefaultRoute('/home/');
 

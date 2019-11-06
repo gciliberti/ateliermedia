@@ -6,7 +6,6 @@ class Media extends \Illuminate\Database\Eloquent\Model{
   protected $primaryKey = 'id';
   public $timestamps = false;
 
-
   /*public function liked(){
     return $this->belongsToMany("tweeterapp\model\Tweet","like","user_id","tweet_id");
   }
@@ -18,5 +17,9 @@ class Media extends \Illuminate\Database\Eloquent\Model{
   public function follows(){
     return $this->belongsToMany("tweeterapp\model\User","follow","follower","followee");
   }*/
+
+
+
+
 }
  ?>

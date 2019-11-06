@@ -61,25 +61,56 @@ class AppController extends \mf\control\AbstractController {
   }
 
   public function viewProfile(){
-      $http = new \mf\utils\HttpRequest();
-      $user = \app\model\User::where('id', '=', $http->get['id'])->first();
+      $user_log = $_SESSION["user_login"];
+      $user = \app\model\User::where('mail', '=', $user_log)->first();
       $user_name = $user->username;
-      $name = $user->surname. " " .$user->name;
+      $name = $user->name;
+      $surname = $user->surname;
       $mail = $user->mail;
       $adress = $user->address;
-      $city = $user->postalcode. " " .$user->city;
+      $city = $user->city;
+      $postalcode = $user->postalcode;
       $picture = "data:image/jpeg;base64,".base64_encode($user->photo);
 
       $tab = array("username" => $user_name,
         "name" => $name,
+        "surname" => $surname,
         "mail" => $mail,
         "adress" => $adress,
         "city" => $city,
+        "postalcode" => $postalcode,
         "picture" => $picture
-    );
+      );
 
       $vueUser = new \app\view\AppView($tab);
       $vueUser->render("profile");
+  }
+
+  public function viewModify(){
+      $user_log = $_SESSION["user_login"];
+      $route = new \mf\router\Router();
+      $url = $route->urlFor('profile');
+      $post = $this->request->post;
+
+      $name = htmlentities($post["name"]);
+      $surname = htmlentities($post["surname"]);
+      $user_name = htmlentities($post["user_name"]);
+      $mail = htmlentities($post["mail"]);
+      $adress = htmlentities($post["adress"]);
+      $city = htmlentities($post["city"]);
+
+       $user = \app\model\User::where('mail', '=', $user_log)->update(['name' => $name,
+       'surname' => $surname, 'username' => $user_name, 'mail' => $mail,
+       'address' => $adress, 'city' => $city]);
+      header('location: '.$url);
+  }
+
+
+  public function viewMedia(){
+      $http = new \mf\utils\HttpRequest();
+      $media = \app\model\Media::where('id', '=', $http->get['id'])->get();
+      $vue = new \app\view\AppView($media);
+      $vue->render('detailMedia');
   }
 
 }
