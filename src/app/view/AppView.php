@@ -266,15 +266,15 @@ EOT;
           $html.= <<<EOT
           <main id="sign_in">
             <form action="${hrefSend}" method="post" class="sign_in">
-                <input type="text" name="mail" id="mail" required placeholder="Mail">
+                <input type="email" name="mail" id="mail" required placeholder="Mail">
                 <input type="text" name="name" id="name" required placeholder="Prenom">
                 <input type="text" name="surname" id="surname" required placeholder="Nom">
                 <input type="text" name="username" id="username" required placeholder="Nom d'utilisateur">
                 <input type="text" name="address" id="address" required placeholder="Adresse">
-                <input type="text" name="postalcode" id="postalcode" required placeholder="Code postal">
+                <input type="number" name="postalcode" id="postalcode" required placeholder="Code postal">
                 <input type="text" name="city" id="city" required placeholder="Ville">
                 <input type="tel" name="phone" id="phone" required placeholder="Tel">
-                <input type="text" name="password" id="password" required placeholder="Mot de passe">
+                <input name="password" type= "password" id="password" required placeholder="Mot de passe">
                 <button type="submit" name="button" class="button">Envoyer</button>
             </form>
           </main>
