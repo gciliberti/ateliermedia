@@ -87,23 +87,70 @@ EOT;
         </div>
       </div>
 EOT;
-    }
+
+}
     return $html;
     }
 
-  private function renderLogin(){
-    $obj = new \mf\router\Router();
-    $hrefSend = $obj->urlFor('checklogin');
-    $html = "";
-      $html.= <<<EOT
-      <form action="${hrefSend}" method="post" class="connect">
-          <input type="email" name="mail" id="mail" required placeholder="Mail">
-          <input type="password" name="password" id="password" required placeholder="Mot de passe">
-          <button type="submit" name="button" class="button">Envoyer</button>
-      </form>
+    public function renderUserView(){
+      $route = new \mf\router\Router();
+      $http = new \mf\utils\HttpRequest();
+      $url = $route->urlFor('profile', ['action' => 'modify']);
+      $urlB = $route->urlFor('modify');
+      $userData = $this->data;
+      $user_name = $userData["username"];
+      $name = $userData["name"];
+      $surname = $userData["surname"];
+      $mail = $userData["mail"];
+      $adress = $userData["adress"];
+      $postalcode = $userData["postalcode"];
+      $city = $userData["city"];
+      $picture = $userData["picture"];
+      $name_sur = $surname. " " .$name;
+      $city_post = $postalcode. " " .$city;
+      if (isset($http->get['action']) && $http->get['action'] === 'modify'){
+        $html = <<<EOT
+        <div id="profil">
+          <form class="conntect" method="post" action="{$urlB}" enctype="multipart/form-data">
+          <img src="${picture}" width="64" height="64" alt="photo de l'utilisateur">
+          <input type="file" name="fileToUpload" accept="image/*" id="fileToUpload">
+            <div class="infos">
+              <input id="name" name="name" value="${surname}">
+              <input id="name" name="surname" value="${name}">
+              <input id="user_name" name="user_name" value="${user_name}">
+              <input id="mail" name="mail" value="${mail}">
+              <div id="where">
+                <input id="adress" name="adress" value="${adress}">
+                <input id="adress" name="postalcode" value="${postalcode}">
+                <input id="city"name="city" value="${city}">
+              </div>
+            </div>
+            <input type="submit" value="valider">
+          </form>
+        </div>
 EOT;
-        return $html;
+      } else {
+      $html = <<<EOT
+      <div id="profil">
+        <form class="conntect">
+        <img src="${picture}" width="64" height="64" alt="photo de l'utilisateur">
+          <div class="infos">
+            <p>${name_sur}</p>
+            <p>${user_name}</p>
+            <p>${mail}</p>
+            <div id="where">
+            <p>${adress}</p>
+            <p>${city_post}</p>
+            </div>
+          </div>
+          <a href="${url}"><img src=""><input type="button" value="modifier"></a>
+        </form>
+      </div>
+EOT;
     }
+
+     return $html;
+  }
 
     private function renderMedia()
     {
@@ -164,7 +211,6 @@ EOT;
             $dateEmprunt = strftime("%A %d %B %G", strtotime($borrow->borrow_date_start));
             $dateRetour = strftime("%A %d %B %G", strtotime($borrow->borrow_date_end));
             $html .= <<<EOT
-
             <div class="item">
               <div class="item__info">
                 <h3>${title}</h3>
@@ -183,6 +229,20 @@ EOT;
         return $html;
     }
 
+        private function renderLogin(){
+      $obj = new \mf\router\Router();
+      $hrefSend = $obj->urlFor('checklogin');
+      $html = "";
+        $html.= <<<EOT
+        <form action="${hrefSend}" method="post" class="connect">
+            <input value="HarbinGuertin@armyspy.com" type="email" name="mail" id="mail" required placeholder="Mail">
+            <input value="deiquiZ7oo" type="password" name="password" id="password" required placeholder="Mot de passe">
+            <button type="submit" name="button" class="button">Envoyer</button>
+        </form>
+EOT;
+          return $html;
+      }
+
     protected function renderBody($selector)
     {
         $content = "";
@@ -195,6 +255,9 @@ EOT;
             case 'detailMedia':
                 $navBar = $this->renderHeader();
                 $content = $this->renderMedia();
+                break;
+            case 'profile':
+                $content = $this->renderUserView();
                 break;
             case 'login':
                 $content = $this->renderLogin();

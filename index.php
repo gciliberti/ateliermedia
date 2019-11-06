@@ -49,18 +49,17 @@ $router->addRoute('borrow',
 $router->addRoute('profile',
 '/profile/',
 '\app\control\AppController',
-'viewProfile',\app\auth\AppAuthentification::ACCESS_LEVEL_USER);
-
+'viewProfile',\app\auth\AppAuthentification::ACCESS_LEVEL_NONE);
 
 $router->addRoute('view',
 '/view/',
 '\app\control\AppController',
 'viewMedia',\app\auth\AppAuthentification::ACCESS_LEVEL_USER);
 
-
-
-
-
+$router->addRoute('modify',
+          '/modify/',
+          '\app\control\AppController',
+          'viewModify',\app\auth\AppAuthentification::ACCESS_LEVEL_USER);
 
 $router->setDefaultRoute('/home/');
 
