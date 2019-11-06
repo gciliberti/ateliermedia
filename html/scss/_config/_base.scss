@@ -7,13 +7,16 @@ $primarycolor: #34B3AA;
 $secondarycolor: #787878;
 $terciarycolor: #E8E8E8;
 $quartuarycolor: #F3F3F3;
-
 $bc: #FCF2E8;
 $font: 'Roboto', sans-serif;
 
 
 html {
   font-family: 'Roboto', sans-serif;
+
+  main{
+    height: auto;
+  }
 
   .flex_container {
     display: flex;
@@ -26,7 +29,7 @@ html {
 
   //border item search
 
-  .green {
+  .flex_item.green {
     border-right: 3px solid darkgreen;
 
     .item__info {
@@ -36,7 +39,7 @@ html {
     }
   }
 
-  .red {
+  .flex_item.red {
     border-right: 3px solid red;
 
     .item__info {
@@ -46,7 +49,7 @@ html {
     }
   }
 
-  .orange {
+  .flex_item.orange {
     border-right: 3px solid orange;
     .item__info {
       p:last-of-type {

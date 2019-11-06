@@ -1,0 +1,67 @@
+body {
+
+
+  main#login {
+
+    form.connect {
+
+      margin-top: 30vh;
+      transform: translateY(-50%);
+
+      input {
+        border: none;
+        border-bottom: solid 2px $primarycolor;
+        background-color: #F7F7F7;
+        margin: 8% auto 8% auto;
+        height: 3em;
+        display: block;
+        width: 65%;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      .button_full {
+        width: 65%;
+        padding: 8px 0;
+        margin: 12% auto 0 auto;
+        display: block;
+        border-radius: 5px;
+        border: none;
+        background-color: $primarycolor;
+        color: white;
+        font-family: $font;
+        font-size: 1.2em;
+
+      }
+    }
+
+    nav {
+      height: 15vh;
+      margin-top: 15vw;
+      text-align: center;
+
+      &:before {
+        content: "";
+        display: block;
+        position: relative;
+        left: 35%;
+        height: 5vh;
+        width: 30%;
+        border-bottom: 2px solid $secondarycolor;
+      }
+
+
+      p {
+        font-size: 1.1em;
+
+        a {
+          cursor: pointer;
+          color: $primarycolor;
+        }
+      }
+    }
+
+  }
+}

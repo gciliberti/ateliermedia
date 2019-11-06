@@ -2,6 +2,7 @@
 
 namespace app\view;
 
+use app\model\Borrow;
 use mf\router\Router;
 
 class AppView extends \mf\view\AbstractView
@@ -24,7 +25,6 @@ class AppView extends \mf\view\AbstractView
         <li><a href="${hrefBorrow}"> <img src="${app_root}/html/img/books-stack.svg" width="32" height="32" alt="Mes emprunts"> </a> </li>
         <li><a href="${hrefProfile}">  <img src="${app_root}/html/img/user.svg" width="32" height="32" alt="Mon Profil"> </a></li>
         <li><a href="${hrefLogout}">  <img src="${app_root}/html/img/logout.svg" width="32" height="32" alt="Mon Profil"> </a></li>
-        <li><a href="${hrefProfile}">  <img src="${app_root}/html/img/user.svg" width="32" height="32" alt="Mon Profil"> </a></li>
       </ul>
     </nav>
     <form class="search" action="${hrefHome}" method="post">
@@ -73,43 +73,37 @@ EOT;
         $router = new \mf\router\Router();
 
         foreach ($data as $media) {
+            $id = $media->id;
             $title = $media->title;
             $type = $media->type;
             $genre = $media->genre;
             $dispo = $media->disponibility;
-            $date_retour = '1671999';
+
+//            var_dump($borrow);
+
+
+//            $date_retour = $media->borrow();
+//            var_dump($date_retour);
             if ($dispo == 1) {
                 $dispo = 'Disponible';
                 $border_class = 'green';
             } elseif ($dispo == 0) {
                 $dispo = 'Indisponible';
                 $border_class = 'red';
-            }elseif ($dispo == 2){
-                $dispo = 'A retourner le :'. $date_retour;
+            } elseif ($dispo == 2) {
+                $borrow = \app\model\Borrow::where('id_media', '=', $id)->where('returned', '=', '0')->get();
+                foreach ($borrow as $result) {
+                    setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
+                    $date_retour = strftime('%d %B %G', strtotime($result->borrow_date_end));
+                    $dispo = 'Retourné le :' . $date_retour;
+                }
                 $border_class = 'orange';
-            }
 
+
+            }
 
             $picture = "data:image/jpeg;base64," . base64_encode($media->picture);
             $hrefMedia = $router->urlFor('view', ['id' => $media->id]);
-    foreach ($data as $media) {
-      $title = $media->title;
-      $type = $media->type;
-      $genre = $media->genre;
-      $dispo = $media->disponibility;
-      switch($dispo){
-        case 0:
-          $dispo = "indisponible";
-          break;
-        case 1:
-          $dispo = "disponible";
-          break;
-        case 2:
-          $dispo = "indisponible";
-          break;
-      }
-      $picture = "data:image/jpeg;base64,".base64_encode($media->picture);
-      $hrefMedia = $router->urlFor('view', ['id' => $media->id]);
             $html .= <<<EOT
       <div class="container">
         <a href="${hrefMedia}">
@@ -131,29 +125,29 @@ EOT;
         }
         return $html;
 
-}
-    return $html;
     }
 
-    public function renderUserView(){
-      $route = new \mf\router\Router();
-      $http = new \mf\utils\HttpRequest();
-      $hrefRetour = $route->urlFor('home');
-      $url = $route->urlFor('profile', ['action' => 'modify']);
-      $urlB = $route->urlFor('modify');
-      $userData = $this->data;
-      $user_name = $userData["username"];
-      $name = $userData["name"];
-      $surname = $userData["surname"];
-      $mail = $userData["mail"];
-      $adress = $userData["adress"];
-      $postalcode = $userData["postalcode"];
-      $city = $userData["city"];
-      $picture = $userData["picture"];
-      $name_sur = $surname. " " .$name;
-      $city_post = $postalcode. " " .$city;
-      if (isset($http->get['action']) && $http->get['action'] === 'modify'){
-        $html = <<<EOT
+
+    public function renderUserView()
+    {
+        $route = new \mf\router\Router();
+        $http = new \mf\utils\HttpRequest();
+        $hrefRetour = $route->urlFor('home');
+        $url = $route->urlFor('profile', ['action' => 'modify']);
+        $urlB = $route->urlFor('modify');
+        $userData = $this->data;
+        $user_name = $userData["username"];
+        $name = $userData["name"];
+        $surname = $userData["surname"];
+        $mail = $userData["mail"];
+        $adress = $userData["adress"];
+        $postalcode = $userData["postalcode"];
+        $city = $userData["city"];
+        $picture = $userData["picture"];
+        $name_sur = $surname . " " . $name;
+        $city_post = $postalcode . " " . $city;
+        if (isset($http->get['action']) && $http->get['action'] === 'modify') {
+            $html = <<<EOT
         <div id="profil">
           <form class="conntect" method="post" action="{$urlB}" enctype="multipart/form-data">
           <img src="${picture}" width="64" height="64" alt="photo de l'utilisateur">
@@ -173,8 +167,8 @@ EOT;
           </form>
         </div>
 EOT;
-      } else {
-      $html = <<<EOT
+        } else {
+            $html = <<<EOT
       <div id="profil">
         <form class="conntect">
         <img src="${picture}" width="64" height="64" alt="photo de l'utilisateur">
@@ -190,22 +184,11 @@ EOT;
           <a href="${url}"><img src=""><input type="button" value="modifier"></a>
         </form>
       </div>
-    private function renderLogin()
-    {
-        $obj = new \mf\router\Router();
-        $hrefSend = $obj->urlFor('checklogin');
-        $html = "";
-        $html .= <<<EOT
-      <form action="${hrefSend}" method="post" class="connect">
-          <input type="email" name="mail" id="mail" required placeholder="Mail">
-          <input type="password" name="password" id="password" required placeholder="Mot de passe">
-          <button type="submit" name="button" class="button">Envoyer</button>
-      </form>
 EOT;
-    }
+        }
 
-     return $html;
-  }
+        return $html;
+    }
 
     private function renderMedia()
     {
@@ -241,21 +224,20 @@ EOT;
 
     private function renderBorrow()
     {
-      setlocale (LC_TIME, 'fr_FR.utf8','fra');
-      $objRout = new \mf\router\Router();
-      $hrefRetour = $objRout->urlFor('home');
-      $user = $this->data;
-      $borrows = $user->borrows()->get();
-      $app_root = (new \mf\utils\HttpRequest())->root;//Pour aller chercher les images
+        setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
+        $objRout = new \mf\router\Router();
+        $hrefRetour = $objRout->urlFor('home');
+        $user = $this->data;
+        $borrows = $user->borrows()->get();
+        $app_root = (new \mf\utils\HttpRequest())->root;//Pour aller chercher les images
         $html = <<<EOT
           <main id="my_borrows">
-          <h1>Mes emprunts</h1>
             <div class="container">
 EOT;
         foreach ($borrows as $borrow) {
-          $mediaBorrow = $borrow->media()->first();
+            $mediaBorrow = $borrow->media()->first();
             $title = $mediaBorrow->title;
-            $picture = "data:image/jpeg;base64,".base64_encode($mediaBorrow->picture);
+            $picture = "data:image/jpeg;base64," . base64_encode($mediaBorrow->picture);
             $type = $mediaBorrow->type;
             $dateEmprunt = strftime("%A %d %B %G", strtotime($borrow->borrow_date_start));
             $dateRetour = strftime("%A %d %B %G", strtotime($borrow->borrow_date_end));
@@ -275,21 +257,28 @@ EOT;
         return $html;
     }
 
-  private function renderLogin(){
-    $obj = new \mf\router\Router();
-    $hrefSend = $obj->urlFor('checklogin');
-    $error = '';
-    if(null !== $this->data){
-      $error = "<p>".$this->data->getMessage()."</p>";
-    }
-    $html = "";
-      $html.= <<<EOT
-      <form action="${hrefSend}" method="post" class="connect">
-          <input type="email" name="mail" id="mail" required placeholder="Mail">
-          <input type="password" name="password" id="password" required placeholder="Mot de passe">
-          ${error}
-          <button type="submit" name="button" class="button">Envoyer</button>
-      </form>
+    private function renderLogin()
+    {
+        $obj = new \mf\router\Router();
+        $hrefSend = $obj->urlFor('checklogin');
+        $hrefNewAccount = $obj->urlFor('register');
+        $error = '';
+        if (null !== $this->data) {
+            $error = "<p>" . $this->data->getMessage() . "</p>";
+        }
+        $html = "";
+        $html .= <<<EOT
+        
+         <form action="${hrefSend}" method="post" class="connect">
+             <input type="email" name="mail" id="mail" required placeholder="Mail">
+             <input type="password" name="password" id="password" required placeholder="Mot de passe">
+             ${error}
+             <button type="submit" name="button" class="button_full">Connexion</button>
+         </form>
+
+        <nav>
+            <p>Pas encore de Compte ? <a href="${hrefNewAccount}">Faire une demande</a></p>
+        </nav>
 EOT;
         return $html;
     }
@@ -300,11 +289,11 @@ EOT;
       *
       */
     private function renderRegister()
-      {
+    {
         $obj = new \mf\router\Router();
         $hrefSend = $obj->urlFor('checkregister');
         $html = "";
-          $html.= <<<EOT
+        $html .= <<<EOT
           <main id="sign_in">
             <form action="${hrefSend}" method="post" class="sign_in">
                 <input type="text" name="mail" id="mail" required placeholder="Mail">
@@ -320,14 +309,16 @@ EOT;
             </form>
           </main>
 EOT;
-          return $html;
-        }
+        return $html;
+    }
 
 
     protected function renderBody($selector)
     {
         $content = "";
         $navBar = "";
+        $identifiant = "";
+        $title = "";
         switch ($selector) {
             case 'home':
                 $navBar = $this->renderHeader();
@@ -342,15 +333,19 @@ EOT;
             case 'profile':
                 $navBar = $this->renderHeaderBack();
                 $content = $this->renderUserView();
+                $identifiant = "profile";
+
                 break;
             case 'login':
                 $content = $this->renderLogin();
                 $identifiant = "login";
+                $title = '<h1>Connexion</h1>';
 
                 break;
             case 'borrow':
                 $navBar = $this->renderHeaderBack();
                 $content = $this->renderBorrow();
+                $title = '<h1>Mes emprunts</h1>';
                 break;
             case 'register':
                 $content = $this->renderRegister();
@@ -364,12 +359,12 @@ EOT;
 
         $footer = $this->renderFooter();
         $html = <<<EOT
-    <header> ${navBar} </header>
+    <header> ${navBar} ${title} </header>
 
     <main id="${identifiant}">
       ${content}
     </main>
-    <footer> ${footer} </footer>
+<!--    <footer>  </footer>-->
 EOT;
 
         return $html;

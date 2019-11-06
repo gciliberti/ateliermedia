@@ -1,21 +1,23 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 html {
   font-family: 'Roboto', sans-serif; }
+  html main {
+    height: auto; }
   html .flex_container {
     display: flex; }
   html .flex_item {
     display: flex; }
-  html .green {
+  html .flex_item.green {
     border-right: 3px solid darkgreen; }
-    html .green .item__info p:last-of-type {
+    html .flex_item.green .item__info p:last-of-type {
       color: darkgreen; }
-  html .red {
+  html .flex_item.red {
     border-right: 3px solid red; }
-    html .red .item__info p:last-of-type {
+    html .flex_item.red .item__info p:last-of-type {
       color: red; }
-  html .orange {
+  html .flex_item.orange {
     border-right: 3px solid orange; }
-    html .orange .item__info p:last-of-type {
+    html .flex_item.orange .item__info p:last-of-type {
       color: orange; }
 
 html {
@@ -24,7 +26,7 @@ html {
   html body {
     margin: 0;
     padding: 0;
-    background-color: #FCF2E8; }
+    background-color: white; }
   html ul {
     padding: 0;
     margin: 0;
@@ -46,7 +48,8 @@ header {
     width: 100%;
     padding-top: 5%; }
     header nav .menu.flex_container {
-      justify-content: space-evenly; }
+      justify-content: space-between;
+      padding: 0 5% 0 5%; }
     header nav .menu li a img {
       width: 46px;
       height: 46px; }
@@ -94,10 +97,73 @@ body main#search .container {
       background-color: #F3F3F3; }
       body main#search .container a .flex_item .item__img img {
         width: 100%;
-        height: auto; }
+        height: auto;
+        vertical-align: middle; }
     body main#search .container a .flex_item .item__info {
-      padding-left: 5px; }
+      padding-left: 10px;
+      width: 80%; }
       body main#search .container a .flex_item .item__info p {
-        color: #787878; }
+        width: 100%; }
+        body main#search .container a .flex_item .item__info p:first-of-type {
+          color: #787878;
+          margin-left: 3px; }
+        body main#search .container a .flex_item .item__info p:last-of-type {
+          text-align: right;
+          margin-top: 50px;
+          margin-bottom: 0;
+          margin-left: -10px; }
+
+body main#login form.connect {
+  margin-top: 30vh;
+  transform: translateY(-50%); }
+  body main#login form.connect input {
+    border: none;
+    border-bottom: solid 2px #34B3AA;
+    background-color: #F7F7F7;
+    margin: 8% auto 8% auto;
+    height: 3em;
+    display: block;
+    width: 65%; }
+    body main#login form.connect input:focus {
+      outline: none; }
+  body main#login form.connect .button_full {
+    width: 65%;
+    padding: 8px 0;
+    margin: 12% auto 0 auto;
+    display: block;
+    border-radius: 5px;
+    border: none;
+    background-color: #34B3AA;
+    color: white;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.2em; }
+body main#login nav {
+  height: 15vh;
+  margin-top: 15vw;
+  text-align: center; }
+  body main#login nav:before {
+    content: "";
+    display: block;
+    position: relative;
+    left: 35%;
+    height: 5vh;
+    width: 30%;
+    border-bottom: 2px solid #787878; }
+  body main#login nav p {
+    font-size: 1.1em; }
+    body main#login nav p a {
+      cursor: pointer;
+      color: #34B3AA; }
+
+body header {
+  width: 100%;
+  height: auto; }
+  body header h1 {
+    color: #787878;
+    width: 100%;
+    text-align: center;
+    font-size: 2em;
+    margin-top: 5vh;
+    margin-bottom: 10px; }
 
 /*# sourceMappingURL=main.css.map */
