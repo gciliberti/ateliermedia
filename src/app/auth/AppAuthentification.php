@@ -48,7 +48,7 @@ class AppAuthentification extends \mf\auth\Authentification {
 
     public function createUser($mail,$name,$surname,$username,$address,$postalcode,$city,$phone, $password,$level=self::ACCESS_LEVEL_USER) {
       $user = \app\model\User::select()->where('mail','=',$mail)->first();
-      if($user == $username){
+      if($user == $mail){
         throw new mf\auth\exception\AuthentificationException('Mail existant en BDD');
       }
       else{
