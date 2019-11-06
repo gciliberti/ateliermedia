@@ -26,7 +26,7 @@ class AppView extends \mf\view\AbstractView
       <ul class="menu">
         <li><a href="${hrefBorrow}"> <img src="${app_root}/html/img/books-stack.svg" width="32" height="32" alt="Mes emprunts"> </a> </li>
         <li><a href="${hrefProfile}">  <img src="${app_root}/html/img/user.svg" width="32" height="32" alt="Mon Profil"> </a></li>
-        <li><a href="${hrefLogout}">  <img src="${app_root}/html/img/logout.svg" width="32" height="32" alt="Mon Profil"> </a></li>
+        <li><a href="${hrefLogout}">  <img src="${app_root}/html/img/logout.svg" width="32" height="32" alt="Deconnexion"> </a></li>
       </ul>
     </nav>
     </div>
@@ -209,7 +209,7 @@ EOT;
       $objRout = new \mf\router\Router();
       $hrefRetour = $objRout->urlFor('home');
       $user = $this->data;
-      $borrows = $user->borrows()->get();
+      $borrows = $user->borrows()->where("returned","=",0)->get();
       $app_root = (new \mf\utils\HttpRequest())->root;//Pour aller chercher les images
         $html = <<<EOT
           <main id="my_borrows">

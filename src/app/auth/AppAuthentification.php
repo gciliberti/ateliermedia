@@ -62,7 +62,7 @@ class AppAuthentification extends \mf\auth\Authentification {
         $newuser->postalcode = $postalcode;
         $newuser->city = $city;
         $newuser->subscription_date = $date = date('Y-m-d H:i:s');
-        $newuser->isvalidate = 0;
+        $newuser->isvalidated = 0;
         $newuser->level = self::ACCESS_LEVEL_USER;
         $newuser->username = $username;
         $newuser->save();
