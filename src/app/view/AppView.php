@@ -7,10 +7,6 @@ use mf\router\Router;
 class AppView extends \mf\view\AbstractView
 {
 
-    /* Méthode renderHeader
-    *
-    *  Retourne le fragment HTML de l'entête (unique pour toutes les vues)
-    */
     private function renderHeader()
     {
         $html = "";
@@ -36,18 +32,14 @@ EOT;
         return $html;
     }
 
-    /* Méthode renderFooter
-    *
-    * Retourne le fragment HTML du bas de la _template (unique pour toutes les vues)
-    */
     private function renderFooter()
     {
         return 'La super app créée en Licence Pro &copy;2019';
     }
 
 
-    private function renderHome()
-    {//private
+    private function renderHome()//nav bar
+    {
         $html = "";
         $requestedId = new \mf\utils\HttpRequest;
         if (isset($requestedId->post['recherche'])) {//Si une recherche a été effectuée
@@ -65,6 +57,17 @@ EOT;
       $type = $media->type;
       $genre = $media->genre;
       $dispo = $media->disponibility;
+      switch($dispo){
+        case 0:
+          $dispo = "indisponible";
+          break;
+        case 1:
+          $dispo = "disponible";
+          break;
+        case 2:
+          $dispo = "indisponible";
+          break;
+      }
       $picture = "data:image/jpeg;base64,".base64_encode($media->picture);
       $hrefMedia = $router->urlFor('view', ['id' => $media->id]);
             $html .= <<<EOT
@@ -134,26 +137,54 @@ EOT;
         return $html;
     }
 
-  /* Méthode renderUeserTweets
-    *
-    * Vue de la fonctionalité afficher tout les Tweets d'un utilisateur donné.
-    *
-    */
+    private function renderBorrow()
+    {
+      setlocale (LC_TIME, 'fr_FR.utf8','fra');
+      $objRout = new \mf\router\Router();
+      $hrefRetour = $objRout->urlFor('home');
+      $user = $this->data;
+      $borrows = $user->borrows()->get();
+      $app_root = (new \mf\utils\HttpRequest())->root;//Pour aller chercher les images
+        $html = <<<EOT
+        <body>
+          <header>
+            <nav>
+              <a href="${hrefRetour}" class="back"><img src="${app_root}/html/img/back.svg" width="32" height="32" alt="fleche de retour"></a>
+            </nav>
+            <h1>Mes emprunts</h1>
+          </header>
+          <main id="my_borrows">
+            <div class="container">
+EOT;
+        foreach ($borrows as $borrow) {
+          $mediaBorrow = $borrow->media()->first();
+            $title = $mediaBorrow->title;
+            $picture = "data:image/jpeg;base64,".base64_encode($mediaBorrow->picture);
+            $type = $mediaBorrow->type;
+            $dateEmprunt = strftime("%A %d %B %G", strtotime($borrow->borrow_date_start));
+            $dateRetour = strftime("%A %d %B %G", strtotime($borrow->borrow_date_end));
+            $html .= <<<EOT
 
-    /* Méthode renderBody
-    *
-    * Retourne la framgment HTML de la balise <body> elle est appelée
-    * par la méthode héritée render.
-    *
-    */
+            <div class="item">
+              <div class="item__info">
+                <h3>${title}</h3>
+                <p class="borrow">emprunté le : ${dateEmprunt}</p>
+                <p class="return">A retourner le : ${dateRetour}</p>
+              </div>
+              <div class="item__img">
+                <img src="${picture}" alt="${type}">
+              </div>
+            </div>
+EOT;
+        }
+        $html .= <<<EOT
+        </body>
+EOT;
+        return $html;
+    }
 
     protected function renderBody($selector)
     {
-
-        /*
-        * voire la classe AbstractView
-        *
-        */
         $content = "";
         $navBar = "";
         switch ($selector) {
@@ -167,6 +198,9 @@ EOT;
                 break;
             case 'login':
                 $content = $this->renderLogin();
+                break;
+            case 'borrow':
+                $content = $this->renderBorrow();
                 break;
             default:
                 $content = $this->renderHome();
