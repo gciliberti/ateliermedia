@@ -9,8 +9,13 @@ class AppController extends \mf\control\AbstractController {
 
   public function viewHome(){
     $medias = \app\model\Media::select()->get();
-    $vue = new \app\view\AppView($medias);
-    $vue->render("home");
+    if(isset($_SESSION['access_level'])){
+      $vue = new \app\view\AppView($medias);
+      $vue->render("home");
+    }
+    else{
+      \mf\router\Router::executeRoute('login');
+    }
   }
 
   public function viewProfile(){
@@ -50,12 +55,17 @@ class AppController extends \mf\control\AbstractController {
       $user_name = filter_var($post["user_name"],FILTER_SANITIZE_STRING);
       $mail = filter_var($post["mail"],FILTER_SANITIZE_STRING);
       $adress = filter_var($post["adress"],FILTER_SANITIZE_STRING);
+      $postalcode = filter_var($post["postalcode"],FILTER_SANITIZE_STRING);
       $city = filter_var($post["city"],FILTER_SANITIZE_STRING);
-      $photo = file_get_contents($_FILES['fileToUpload']['tmp_name']);
 
        $user = \app\model\User::where('mail', '=', $user_log)->update(['name' => $name,
        'surname' => $surname, 'username' => $user_name, 'mail' => $mail,
-       'address' => $adress, 'city' => $city, 'photo' => $photo]);
+       'address' => $adress, 'city' => $city,'postalcode' => $postalcode]);
+
+       if($_FILES['fileToUpload']['tmp_name'] != ""){
+         $photo = file_get_contents($_FILES['fileToUpload']['tmp_name']);
+         $user = \app\model\User::where('mail', '=', $user_log)->update(['photo' => $photo]);
+       }
       header('location: '.$url);
   }
 
