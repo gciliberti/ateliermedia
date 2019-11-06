@@ -20,17 +20,19 @@ class AppView extends \mf\view\AbstractView
         $hrefProfile = $objRout->urlFor('profile');
         $hrefHome = $objRout->urlFor('home');
         $html .= <<<EOT
-<div class="flex_container">
+<div>
+    
+    <nav>
+      <ul class="menu flex_container">
+        <li><a href="${hrefBorrow}"> <img src="${app_root}/html/img/books-stack.svg" width="32" height="32" alt="Mes emprunts"> </a> </li>
+        <li><a href="${hrefProfile}">  <img src="${app_root}/html/img/user.svg" width="32" height="32" alt="Mon Profil"> </a></li>
+        <li><a href="${hrefProfile}">  <img src="${app_root}/html/img/user.svg" width="32" height="32" alt="Mon Profil"> </a></li>
+      </ul>
+    </nav>
     <form class="search" action="${hrefHome}" method="post">
       <input src="${app_root}/html/img/search.svg" width="32" height="32" type="image" alt="Recherche">
       <input type="text" name="recherche" value="" placeholder="Rechercher">
     </form>
-    <nav>
-      <ul class="menu">
-        <li><a href="${hrefBorrow}"> <img src="${app_root}/html/img/books-stack.svg" width="32" height="32" alt="Mes emprunts"> </a> </li>
-        <li><a href="${hrefProfile}">  <img src="${app_root}/html/img/user.svg" width="32" height="32" alt="Mon Profil"> </a></li>
-      </ul>
-    </nav>
     </div>
 EOT;
         return $html;
@@ -58,19 +60,32 @@ EOT;
             $data = $this->data;
         }
 
-    $router = new \mf\router\Router();
+        $router = new \mf\router\Router();
 
-    foreach ($data as $media) {
-      $title = $media->title;
-      $type = $media->type;
-      $genre = $media->genre;
-      $dispo = $media->disponibility;
-      $picture = "data:image/jpeg;base64,".base64_encode($media->picture);
-      $hrefMedia = $router->urlFor('view', ['id' => $media->id]);
+        foreach ($data as $media) {
+            $title = $media->title;
+            $type = $media->type;
+            $genre = $media->genre;
+            $dispo = $media->disponibility;
+            $date_retour = '1671999';
+            if ($dispo == 1) {
+                $dispo = 'Disponible';
+                $border_class = 'green';
+            } elseif ($dispo == 0) {
+                $dispo = 'Indisponible';
+                $border_class = 'red';
+            }elseif ($dispo == 2){
+                $dispo = 'A retourner le :'. $date_retour;
+                $border_class = 'orange';
+            }
+
+
+            $picture = "data:image/jpeg;base64," . base64_encode($media->picture);
+            $hrefMedia = $router->urlFor('view', ['id' => $media->id]);
             $html .= <<<EOT
       <div class="container">
         <a href="${hrefMedia}">
-        <div class="item">
+        <div class="flex_item ${border_class}">
           <div class="item__img">
             <img src="${picture}" alt="${type}">
           </div>
@@ -79,20 +94,22 @@ EOT;
             <p class="type">${type} / ${genre}</p>
             <p class="available">${dispo}</p>
           </div>
-          </a>
+          
           <!-- boîte à répeter autant de fois qu'il le faut-->
         </div>
+        </a>
       </div>
 EOT;
-    }
-    return $html;
+        }
+        return $html;
     }
 
-  private function renderLogin(){
-    $obj = new \mf\router\Router();
-    $hrefSend = $obj->urlFor('checklogin');
-    $html = "";
-      $html.= <<<EOT
+    private function renderLogin()
+    {
+        $obj = new \mf\router\Router();
+        $hrefSend = $obj->urlFor('checklogin');
+        $html = "";
+        $html .= <<<EOT
       <form action="${hrefSend}" method="post" class="connect">
           <input type="email" name="mail" id="mail" required placeholder="Mail">
           <input type="password" name="password" id="password" required placeholder="Mot de passe">
@@ -110,7 +127,7 @@ EOT;
             $title = $media->title;
             $type = $media->type;
             $genre = $media->genre;
-            $picture = "data:image/jpeg;base64,".base64_encode($media->picture);
+            $picture = "data:image/jpeg;base64," . base64_encode($media->picture);
             $desc = $media->description;
             $available = $media->disponibility;
 
@@ -134,11 +151,11 @@ EOT;
         return $html;
     }
 
-  /* Méthode renderUeserTweets
-    *
-    * Vue de la fonctionalité afficher tout les Tweets d'un utilisateur donné.
-    *
-    */
+    /* Méthode renderUeserTweets
+      *
+      * Vue de la fonctionalité afficher tout les Tweets d'un utilisateur donné.
+      *
+      */
 
     /* Méthode renderBody
     *
@@ -160,13 +177,17 @@ EOT;
             case 'home':
                 $navBar = $this->renderHeader();
                 $content = $this->renderHome();
+                $identifiant = "search";
                 break;
             case 'detailMedia':
                 $navBar = $this->renderHeader();
                 $content = $this->renderMedia();
+                $identifiant = "detail";
                 break;
             case 'login':
                 $content = $this->renderLogin();
+                $identifiant = "login";
+
                 break;
             default:
                 $content = $this->renderHome();
@@ -178,9 +199,9 @@ EOT;
         $html = <<<EOT
     <header> ${navBar} </header>
 
-    <section>
+    <main id="${identifiant}">
       ${content}
-    </section>
+    </main>
     <footer> ${footer} </footer>
 EOT;
 

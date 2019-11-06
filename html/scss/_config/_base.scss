@@ -6,17 +6,54 @@
 $primarycolor: #34B3AA;
 $secondarycolor: #787878;
 $terciarycolor: #E8E8E8;
+$quartuarycolor: #F3F3F3;
 
+$bc: #FCF2E8;
 $font: 'Roboto', sans-serif;
 
 
 html {
   font-family: 'Roboto', sans-serif;
 
-  .flex_container{
+  .flex_container {
     display: flex;
   }
 
+  .flex_item {
+    display: flex;
+  }
+
+
+  //border item search
+
+  .green {
+    border-right: 3px solid darkgreen;
+
+    .item__info {
+      p:last-of-type {
+        color: darkgreen;
+      }
+    }
+  }
+
+  .red {
+    border-right: 3px solid red;
+
+    .item__info {
+      p:last-of-type {
+        color: red;
+      }
+    }
+  }
+
+  .orange {
+    border-right: 3px solid orange;
+    .item__info {
+      p:last-of-type {
+        color: orange;
+      }
+    }
+  }
 
 }
 

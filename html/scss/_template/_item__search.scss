@@ -1,0 +1,52 @@
+body {
+  main#search {
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .container {
+      width: 100%;
+
+      a {
+        .flex_item {
+          background-color: $terciarycolor;
+          width: 95%;
+          margin-left: auto;
+          margin-right: auto;
+          justify-content:start;
+          margin-bottom: 15px;
+
+          .item__img {
+            width: 20%;
+            padding: 10px;
+            background-color: $quartuarycolor;
+
+            img {
+              width: 100%;
+              height: auto;
+            }
+          }
+
+          .item__info {
+            padding-left: 5px;
+
+            p{
+              color: $secondarycolor;
+
+              &:last-of-type{
+
+              }
+            }
+
+
+          }
+
+
+        }
+      }
+    }
+  }
+}
+
