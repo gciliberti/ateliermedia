@@ -5,6 +5,16 @@ html {
     height: auto; }
   html .flex_container {
     display: flex; }
+  html .button-empty {
+    text-align: center;
+    width: 100%;
+    padding: 5px 0;
+    display: block;
+    margin: auto;
+    color: #34B3AA;
+    background-color: white;
+    border: 1px solid #34B3AA;
+    border-radius: 5px; }
   html .flex_item {
     display: flex; }
   html .flex_item.green {
@@ -19,6 +29,18 @@ html {
     border-right: 3px solid orange; }
     html .flex_item.orange .item__info p:last-of-type {
       color: orange; }
+  html input {
+    border: none;
+    border-bottom: solid 1px #34B3AA;
+    background-color: #F7F7F7;
+    margin-bottom: 15px;
+    height: 2em; }
+    html input:focus {
+      outline: none; }
+    html input input {
+      background-color: transparent;
+      border: none;
+      color: #34B3AA; }
 
 html {
   margin: 0;
@@ -165,5 +187,50 @@ body header {
     font-size: 2em;
     margin-top: 5vh;
     margin-bottom: 10px; }
+
+#profil {
+  margin-top: 50vh;
+  transform: translateY(-50%); }
+  #profil .conntect {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    width: 80%;
+    margin: auto; }
+    #profil .conntect #image {
+      margin: auto;
+      display: block;
+      grid-column: 2 / 6;
+      grid-row: 1; }
+      #profil .conntect #image div {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        overflow: hidden; }
+        #profil .conntect #image div img {
+          width: 100%;
+          height: auto; }
+    #profil .conntect .infos {
+      grid-column: 1 / 7;
+      grid-row: 2;
+      margin-top: 50px; }
+    #profil .conntect .button-empty, #profil .conntect a {
+      grid-column: 2 / 6;
+      grid-row: 3; }
+    #profil .conntect .button-empty {
+      margin-top: 100px; }
+    #profil .conntect input {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; }
+    #profil .conntect #file {
+      display: none; }
+    #profil .conntect label {
+      background-color: #F7F7F7;
+      border: 1px solid black;
+      text-align: center;
+      font-size: 0.8em;
+      padding: 0 10px;
+      display: block;
+      border-radius: 5px; }
 
 /*# sourceMappingURL=main.css.map */
