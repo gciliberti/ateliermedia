@@ -34,6 +34,22 @@ EOT;
         return $html;
     }
 
+    private function renderHeaderBack()
+    {
+        $html = "";
+        $app_root = (new \mf\utils\HttpRequest())->root;//Pour aller chercher les images
+        $objRout = new \mf\router\Router();
+        $hrefRetour = $objRout->urlFor('home');
+        $html .= <<<EOT
+        <nav>
+          <a href="${hrefRetour}" class="back">
+            <img src="${app_root}/html/img/back.svg" width="32" height="32" alt="fleche de retour">
+          </a>
+        </nav>
+EOT;
+        return $html;
+    }
+
     private function renderFooter()
     {
         return 'La super app créée en Licence Pro &copy;2019';
@@ -97,6 +113,7 @@ EOT;
     public function renderUserView(){
       $route = new \mf\router\Router();
       $http = new \mf\utils\HttpRequest();
+      $hrefRetour = $route->urlFor('home');
       $url = $route->urlFor('profile', ['action' => 'modify']);
       $urlB = $route->urlFor('modify');
       $userData = $this->data;
@@ -195,14 +212,8 @@ EOT;
       $borrows = $user->borrows()->get();
       $app_root = (new \mf\utils\HttpRequest())->root;//Pour aller chercher les images
         $html = <<<EOT
-        <body>
-          <header>
-            <nav>
-              <a href="${hrefRetour}" class="back"><img src="${app_root}/html/img/back.svg" width="32" height="32" alt="fleche de retour"></a>
-            </nav>
-            <h1>Mes emprunts</h1>
-          </header>
           <main id="my_borrows">
+          <h1>Mes emprunts</h1>
             <div class="container">
 EOT;
         foreach ($borrows as $borrow) {
@@ -225,9 +236,6 @@ EOT;
             </div>
 EOT;
         }
-        $html .= <<<EOT
-        </body>
-EOT;
         return $html;
     }
 
@@ -285,16 +293,18 @@ EOT;
                 $content = $this->renderHome();
                 break;
             case 'detailMedia':
-                $navBar = $this->renderHeader();
+                $navBar = $this->renderHeaderBack();
                 $content = $this->renderMedia();
                 break;
             case 'profile':
+                $navBar = $this->renderHeaderBack();
                 $content = $this->renderUserView();
                 break;
             case 'login':
                 $content = $this->renderLogin();
                 break;
             case 'borrow':
+                $navBar = $this->renderHeaderBack();
                 $content = $this->renderBorrow();
                 break;
             case 'register':
