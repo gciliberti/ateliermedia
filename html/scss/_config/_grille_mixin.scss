@@ -1,0 +1,8 @@
+@mixin cellule($nbcel, $offset, $nbcolgrid, $lggutgrid) {
+
+  $lgcol: (100% - (($nbcolgrid + 1) * $lggutgrid)) / $nbcolgrid;
+
+  width: $nbcel * $lgcol + (($nbcel - 1) * $lggutgrid);
+  margin-left: $offset * $lgcol + (($offset + 1) * $lggutgrid);
+
+}

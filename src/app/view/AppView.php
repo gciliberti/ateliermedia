@@ -251,7 +251,7 @@ EOT;
         $app_root = (new \mf\utils\HttpRequest())->root;//Pour aller chercher les images
         $html = <<<EOT
           <main id="my_borrows">
-            <div class="container">
+            <div class="flex_container">
 EOT;
         foreach ($borrows as $borrow) {
             $mediaBorrow = $borrow->media()->first();

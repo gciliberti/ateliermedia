@@ -2,6 +2,7 @@
 @import "_config/breakpoint";
 @import "_config/base";
 @import "_config/reset";
+@import "_config/grille_mixin";
 //import des templates
 @import "_template/nav";
 @import "_template/item__search";
@@ -9,5 +10,5 @@
 @import "_template/header";
 @import "_template/register";
 @import "_template/media";
-@import "_template/borrow";
 @import "_template/profile";
+@import "_template/borrow";
