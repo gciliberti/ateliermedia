@@ -47,6 +47,10 @@ class AppAuthentification extends \mf\auth\Authentification {
      */
 
     public function createUser($mail,$name,$surname,$username,$address,$postalcode,$city,$phone, $password,$level=self::ACCESS_LEVEL_USER) {
+      $app_root = (new \mf\utils\HttpRequest())->root;//Pour aller chercher les images
+
+      $Pathphoto = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$app_root."/html/img/avatar.png";
+      $dataImg = file_get_contents($Pathphoto);
       $user = \app\model\User::select()->where('mail','=',$mail)->first();
       if($user == $username){
         throw new mf\auth\exception\AuthentificationException('Mail existant en BDD');
@@ -65,6 +69,7 @@ class AppAuthentification extends \mf\auth\Authentification {
         $newuser->isvalidated = 0;
         $newuser->level = self::ACCESS_LEVEL_USER;
         $newuser->username = $username;
+        $newuser->photo = $dataImg;
         $newuser->save();
       }
     }

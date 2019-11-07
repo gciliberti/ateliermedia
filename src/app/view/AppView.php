@@ -24,7 +24,7 @@ class AppView extends \mf\view\AbstractView
       <ul class="menu flex_container">
         <li><a href="${hrefBorrow}"> <img src="${app_root}/html/img/books-stack.svg" width="32" height="32" alt="Mes emprunts"> </a> </li>
         <li><a href="${hrefProfile}">  <img src="${app_root}/html/img/user.svg" width="32" height="32" alt="Mon Profil"> </a></li>
-        <li><a href="${hrefLogout}">  <img src="${app_root}/html/img/logout.svg" width="32" height="32" alt="Mon Profil"> </a></li>
+        <li><a href="${hrefLogout}">  <img src="${app_root}/html/img/logout.svg" width="32" height="32" alt="Deconnexion"> </a></li>
       </ul>
     </nav>
     <form class="search" action="${hrefHome}" method="post">
@@ -153,14 +153,14 @@ EOT;
               <input id="file" type="file" name="fileToUpload" accept="image/png, image/gif, image/jpeg" id="fileToUpload">
             </div>
             <div class="infos">
-              <input id="name" name="name" value="${surname}">
-              <input id="surname" name="surname" value="${name}">
-              <input id="user_name" name="user_name" value="${user_name}">
-              <input id="mail" name="mail" value="${mail}">
+              <input required id="name" name="name" value="${surname}">
+              <input required id="surname" name="surname" value="${name}">
+              <input required id="user_name" name="user_name" value="${user_name}">
+              <input required id="mail" name="mail" value="${mail}">
               <div id="where">
-                <input id="adress" name="adress" value="${adress}">
-                <input id="postalcode" name="postalcode" value="${postalcode}">
-                <input id="city"name="city" value="${city}">
+                <input required id="adress" name="adress" value="${adress}">
+                <input required id="postalcode" name="postalcode" value="${postalcode}">
+                <input required id="city"name="city" value="${city}">
               </div>
             </div>
             <input class="button-empty" type="submit" value="valider">
@@ -304,7 +304,7 @@ EOT;
                 <input type="text" name="surname" id="surname" required placeholder="Nom">
                 <input type="text" name="username" id="username" required placeholder="Nom d'utilisateur">
                 <input type="text" name="address" id="address" required placeholder="Adresse">
-                <input type="text" name="postalcode" id="postalcode" required placeholder="Code postal">
+                <input type="number" name="postalcode" id="postalcode" required placeholder="Code postal">
                 <input type="text" name="city" id="city" required placeholder="Ville">
                 <input type="tel" name="phone" id="phone" required placeholder="Tel">
                 <input type="text" name="password" id="password" required placeholder="Mot de passe">
@@ -350,6 +350,7 @@ EOT;
                 $title = '<h1>Mes emprunts</h1>';
                 break;
             case 'register':
+                $navBar = $this->renderHeaderBack();
                 $content = $this->renderRegister();
                 $identifiant = "register";
                 $title = '<h1>Inscription</h1>';

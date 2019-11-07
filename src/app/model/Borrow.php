@@ -9,5 +9,6 @@ class Borrow extends \Illuminate\Database\Eloquent\Model{
   public function media(){
     return $this->hasOne('app\model\Media','id');
   }
+
 }
  ?>
