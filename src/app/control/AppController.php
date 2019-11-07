@@ -70,6 +70,7 @@ class AppController extends \mf\control\AbstractController {
       // echo $mail;
       if($testRef == 0){
         //première requete car si change mail doit pouvoir etre executé
+          // rien n'est executé si mail invalide
         if($_FILES['fileToUpload']['tmp_name'] != ""){
           $photo = file_get_contents($_FILES['fileToUpload']['tmp_name']);
           $user = \app\model\User::where('mail', '=', $user_log)->update(['photo' => $photo]);
