@@ -45,7 +45,7 @@ EOT;
         $html .= <<<EOT
         <nav>
           <a href="${hrefRetour}" class="back">
-            <img src="${app_root}/html/img/back.svg" width="32" height="32" alt="fleche de retour">
+            <img src="${app_root}/html/img/back.svg" width="32" height="32" alt="fleche de retour" class="return">
           </a>
         </nav>
 EOT;
@@ -117,7 +117,7 @@ EOT;
       </div>
 EOT;
         }
-        $html.='</div>';
+        $html .= '</div>';
         return $html;
 
     }
@@ -195,29 +195,44 @@ EOT;
     private function renderMedia()
     {
         $html = '';
-
+        $color_classe = '';
         foreach ($this->data as $media) {
+            $id = $media->id;
             $title = $media->title;
             $type = $media->type;
             $genre = $media->genre;
             $picture = "data:image/jpeg;base64," . base64_encode($media->picture);
             $desc = $media->description;
-            $available = $media->disponibility;
+            $dispo = $media->disponibility;
 
-            if ($available == 1) {
-                $dispo = "Disponible";
-            } else {
-                $dispo = "Indisponible";
+            switch ($dispo) {
+                case  0:
+                    $dispo = "Indisponible";
+                    $color_classe = 'red';
+                    break;
+                case  1:
+                    $dispo = "Disponible";
+                    $color_classe = 'green';
+                    break;
+                case  2;
+                    $borrow = \app\model\Borrow::where('id_media', '=', $id)->where('returned', '=', '0')->get();
+                    foreach ($borrow as $result) {
+                        setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
+                        $date_retour = strftime('%d %B %G', strtotime($result->borrow_date_end));
+                        $dispo = 'Retourné le :' . $date_retour;
+                    }
+                    $color_classe = 'orange';
+                    break;
             }
 
             $html .= <<<EOT
 
-    <div class="container__media">
+    <div class="container__media grid_container">
         <img src="${picture}" alt="${type}">
         <h3>${title}</h3>
         <p class="type">${genre} / ${type}</p>
         <p class="description">${desc}</p>
-        <p class="available">${dispo}</p>
+        <p class="available ${color_classe}">${dispo}</p>
       </div>
 EOT;
         }
@@ -329,12 +344,12 @@ EOT;
                 $navBar = $this->renderHeaderBack();
                 $content = $this->renderMedia();
                 $identifiant = "detail";
+                $title = '<h1 class="h1_center">Media</h1>';
                 break;
             case 'profile':
                 $navBar = $this->renderHeaderBack();
                 $content = $this->renderUserView();
                 $identifiant = "profile";
-
                 break;
             case 'login':
                 $content = $this->renderLogin();
@@ -361,7 +376,7 @@ EOT;
 
         $footer = $this->renderFooter();
         $html = <<<EOT
-    <header> ${navBar} ${title} </header>
+    <header> ${navBar} ${title}  </header>
 
     <main id="${identifiant}">
       ${content}

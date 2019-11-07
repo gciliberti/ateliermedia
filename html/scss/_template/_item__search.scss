@@ -59,9 +59,17 @@ body {
 
                 &:last-of-type {
                   text-align: right;
-                  margin-top: 50px;
+                  margin-top: 20vw;
                   margin-bottom: 0;
                   margin-left: -10px;
+
+                  @include md{
+                    margin-top: 3vw;
+                  }
+
+                  @include lg{
+                    margin-top: 3vw;
+                  }
                 }
               }
 

@@ -40,9 +40,13 @@ html {
   input {
     background-color: $terciarycolor;
 
-    &:focus{
+    &:focus {
       outline: none;
     }
+  }
+
+  img {
+    max-width: 100%;
   }
 }
 

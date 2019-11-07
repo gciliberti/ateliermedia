@@ -70,6 +70,55 @@ html {
     }
   }
 
+  #detail {
+    p.green {
+      color: $dispo_color;
+
+      &:before {
+      content: '';
+        display: block;
+        width: 65%;
+        border: 2px solid $dispo_color;
+        position: relative;
+        top: 10px;
+        font-size: 1.2em;
+      }
+    }
+
+    p.red {
+      color: $indispo_color;
+
+      &:before {
+        content: '';
+        display: block;
+        width: 65%;
+        border: 2px solid $indispo_color;
+        position: relative;
+        top: 10px;
+        font-size: 1.2em;
+
+      }
+    }
+
+    p.orange{
+      color: $retour_color;
+
+      &:before {
+        content: '';
+        display: block;
+        width: 25%;
+        border: 2px solid $retour_color;
+        position: relative;
+        top: 10px;
+        font-size: 1.2em;
+
+        @include md(){
+          width: 45%;
+        }
+      }
+    }
+  }
+
   input {
     border: none;
     border-bottom: solid 2px $primarycolor;

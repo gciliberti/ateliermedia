@@ -1,22 +1,12 @@
 //import fichier de config
-
+@import "_config/breakpoint";
 @import "_config/base";
 @import "_config/reset";
-@import "_config/breakpoint";
-
-
 //import des templates
-
 @import "_template/nav";
 @import "_template/item__search";
 @import "_template/login";
 @import "_template/header";
 @import "_template/register";
-
-
-
-
-
-
-
+@import "_template/media";
 @import "_template/profile";
