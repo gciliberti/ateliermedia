@@ -22,39 +22,6 @@ html {
     border-right: 3px solid #E1A912; }
     html .flex_item.orange .item__info p:last-of-type {
       color: orange; }
-  html #detail p.green {
-    color: #43AB28; }
-    html #detail p.green:before {
-      content: '';
-      display: block;
-      width: 65%;
-      border: 2px solid #43AB28;
-      position: relative;
-      top: 10px;
-      font-size: 1.2em; }
-  html #detail p.red {
-    color: #E12012; }
-    html #detail p.red:before {
-      content: '';
-      display: block;
-      width: 65%;
-      border: 2px solid #E12012;
-      position: relative;
-      top: 10px;
-      font-size: 1.2em; }
-  html #detail p.orange {
-    color: #E1A912; }
-    html #detail p.orange:before {
-      content: '';
-      display: block;
-      width: 25%;
-      border: 2px solid #E1A912;
-      position: relative;
-      top: 10px;
-      font-size: 1.2em; }
-      @media (min-width: 768px) {
-        html #detail p.orange:before {
-          width: 45%; } }
   html input {
     border: none;
     border-bottom: solid 2px #34B3AA;
@@ -106,8 +73,6 @@ html {
     background-color: #E8E8E8; }
     html input:focus {
       outline: none; }
-  html img {
-    max-width: 100%; }
 
 header {
   width: 100%;
@@ -190,15 +155,9 @@ body main#search .grid_container .container {
           margin-left: 3px; }
         body main#search .grid_container .container a .flex_item .item__info p:last-of-type {
           text-align: right;
-          margin-top: 20vw;
+          margin-top: 50px;
           margin-bottom: 0;
           margin-left: -10px; }
-          @media (min-width: 768px) {
-            body main#search .grid_container .container a .flex_item .item__info p:last-of-type {
-              margin-top: 3vw; } }
-          @media (min-width: 992px) {
-            body main#search .grid_container .container a .flex_item .item__info p:last-of-type {
-              margin-top: 3vw; } }
 
 body main#login form.connect {
   margin-top: 30vh;
@@ -246,42 +205,6 @@ body main#register form.grid_container input {
     grid-column: 6 span; }
 body main#register form.grid_container button {
   grid-column: 6 span; }
-
-body header nav img.return {
-  position: absolute;
-  top: 6vw; }
-body header h1.h1_center {
-  margin-top: 0; }
-body main#detail {
-  margin-top: 5vh; }
-  body main#detail .grid_container {
-    grid-template-columns: repeat(12, 1fr);
-    text-align: center; }
-    body main#detail .grid_container img {
-      grid-column: 12 span;
-      margin-right: auto;
-      margin-left: auto;
-      width: 20%;
-      height: auto; }
-    body main#detail .grid_container h3 {
-      grid-column: 12 span;
-      margin-top: 2vh;
-      margin-bottom: 2vh;
-      font-size: 1.5em; }
-    body main#detail .grid_container p.type {
-      text-align: left;
-      grid-column-start: 3;
-      grid-column-end: 12;
-      font-size: 1.2em; }
-    body main#detail .grid_container p.description {
-      text-align: left;
-      grid-column-start: 3;
-      grid-column-end: 11;
-      margin-bottom: 8vh; }
-    body main#detail .grid_container p.available {
-      grid-column-start: 2;
-      grid-column-end: 11;
-      text-align: right; }
 
 #profil {
   margin-top: 50vh;
