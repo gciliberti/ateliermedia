@@ -206,6 +206,10 @@ body main#search .grid_container .container {
 body main#login form.connect {
   margin-top: 30vh;
   transform: translateY(-50%); }
+  body main#login form.connect p {
+    width: 100%;
+    text-align: center;
+    color: #E12012; }
 body main#login nav {
   height: 15vh;
   margin-top: 15vw;

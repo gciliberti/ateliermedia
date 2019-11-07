@@ -283,7 +283,7 @@ EOT;
         $hrefNewAccount = $obj->urlFor('register');
         $error = '';
         if (null !== $this->data) {
-            $error = "<p>" . $this->data->getMessage() . "</p>";
+            $error = "<p class='error'>" . $this->data->getMessage() . "</p>";
         }
         $html = "";
         $html .= <<<EOT
