@@ -370,7 +370,7 @@ body main#detail {
   margin: 10px;
   box-shadow: 1px 1px 3px lightgrey;
   min-width: 350px;
-  width: 100%; }
+  width: 95%; }
   @media (min-width: 768px) {
     #my_borrows .item {
       width: 31.6%;
