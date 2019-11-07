@@ -19,7 +19,7 @@ class AppView extends \mf\view\AbstractView
         $hrefLogout = $objRout->urlFor('logout');
         $html .= <<<EOT
 <div>
-    
+
     <nav>
       <ul class="menu flex_container">
         <li><a href="${hrefBorrow}"> <img src="${app_root}/html/img/books-stack.svg" width="32" height="32" alt="Mes emprunts"> </a> </li>
@@ -110,7 +110,7 @@ EOT;
             <p class="type">${type} / ${genre}</p>
             <p class="available">${dispo}</p>
           </div>
-          
+
           <!-- boîte à répeter autant de fois qu'il le faut-->
         </div>
         </a>
@@ -172,7 +172,9 @@ EOT;
       <div id="profil">
         <form class="conntect">
           <div id="image">
-            <img src="${picture}" width="64" height="64" alt="photo de l'utilisateur">
+            <div>
+              <img src="${picture}" width="64" height="64" alt="photo de l'utilisateur">
+            </div>
           </div>
           <div class="infos">
             <p>${name_sur}</p>
@@ -270,7 +272,7 @@ EOT;
         }
         $html = "";
         $html .= <<<EOT
-        
+
          <form action="${hrefSend}" method="post" class="connect">
              <input type="email" name="mail" id="mail" required placeholder="Mail">
              <input type="password" name="password" id="password" required placeholder="Mot de passe">

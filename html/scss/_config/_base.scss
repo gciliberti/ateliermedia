@@ -96,14 +96,17 @@ html {
 
   .button-empty {
     text-align: center;
-    width: 100%;
-    padding: 5px 0;
+    width: 65%;
+    padding: 8px 0;
     display: block;
     margin: auto;
     color: $primarycolor;
-    background-color: white;
+    background-color: $bc;
     border: 2px solid $primarycolor;
     border-radius: 5px;
+    font-family: $font;
+    font-size: 1.2em;
+    max-width: 300px;
   }
 
 
