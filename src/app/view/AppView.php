@@ -209,7 +209,7 @@ EOT;
       $objRout = new \mf\router\Router();
       $hrefRetour = $objRout->urlFor('home');
       $user = $this->data;
-      $borrows = $user->borrows()->where("returned","=",0)->get();
+      $borrows = $user->currentborrows()->get();
       $app_root = (new \mf\utils\HttpRequest())->root;//Pour aller chercher les images
         $html = <<<EOT
           <main id="my_borrows">
