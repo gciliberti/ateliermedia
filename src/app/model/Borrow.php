@@ -7,7 +7,7 @@ class Borrow extends \Illuminate\Database\Eloquent\Model{
   public $timestamps = false;
 
   public function media(){
-    return $this->hasOne('app\model\Media','id');
+    return $this->belongsTo('app\model\Media','id_media');
   }
 
 }

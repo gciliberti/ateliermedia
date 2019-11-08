@@ -253,7 +253,7 @@ EOT;
           <main id="my_borrows">
             <div class="flex_container">
 EOT;
-        if(!empty($borrows['items']))
+        if(isset($borrows[0]))
         {
         foreach ($borrows as $borrow) {
             $mediaBorrow = $borrow->media()->first();
@@ -280,7 +280,7 @@ EOT;
         $html .= <<<EOT
         <p>Vous n'avez pas d'emprunts en cours</p>
 EOT;
-      }
+}
         return $html;
     }
 
