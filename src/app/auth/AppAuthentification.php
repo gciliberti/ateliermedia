@@ -52,7 +52,7 @@ class AppAuthentification extends \mf\auth\Authentification {
       $Pathphoto = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$app_root."/html/img/avatar.png";
       $dataImg = file_get_contents($Pathphoto);
       $user = \app\model\User::select()->where('mail','=',$mail)->first();
-      if($user == $username){
+      if($user == $mail){
         throw new mf\auth\exception\AuthentificationException('Mail existant en BDD');
       }
       else{
