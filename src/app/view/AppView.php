@@ -330,7 +330,7 @@ EOT;
                 <input type="number" name="postalcode" id="postalcode" required placeholder="Code postal">
                 <input type="text" name="city" id="city" required placeholder="Ville">
                 <input type="tel" name="phone" id="phone" required placeholder="Tel">
-                <input type="text" name="password" id="password" required placeholder="Mot de passe">
+                <input type="password" name="password" id="password" required placeholder="Mot de passe">
                 <button type="submit" name="button" class="button_full">Envoyer</button>
             </form>
 EOT;
